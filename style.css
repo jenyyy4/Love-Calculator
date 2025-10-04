@@ -1612,3 +1612,43 @@ body.light-theme .footer {
 .social-share button:hover {
   background-color: #ff7a7a;
 }
+
+
+/* ==============================
+   🌙 THEME STYLES
+   ============================== */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s, color 0.4s;
+}
+
+:root {
+  --bg: #0f0e17;
+  --text: #ffffff;
+  --muted: #a0a0a0;
+  --accent: #ff2e63;
+  --card-bg: #1e1e2f;
+}
+
+body.light-theme {
+  --bg: #ffffff;
+  --text: #111;
+  --muted: #666;
+  --accent: #ff2e63;
+  --card-bg: #f6f6f6;
+}
+
+/* Example for card / container */
+.container, .card {
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Update ring color if needed */
+.ring {
+  stroke: var(--accent);
+  transition: stroke 0.4s;
+}
