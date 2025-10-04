@@ -285,83 +285,198 @@ body {
   }
 }
 
-/* Premium Romantic Tip Card */
-.romantic-tip-card {
-  margin-top: 20px;
+/* ================================
+   🔮 MYSTICAL LOVE ORACLE 🔮
+   ================================ */
+
+/* Import elegant fonts for oracle */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Dancing+Script:wght@400;500;600&display=swap');
+
+.love-oracle {
+  margin-top: 30px;
   position: relative;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.05), 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.love-oracle:not(.hidden) {
+  transform: translateY(0);
+  opacity: 1;
+  animation: oracleReveal 1.2s ease-out;
+}
+
+.oracle-container {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Magical sparkles background */
+.oracle-sparkles {
+  position: absolute;
+  inset: -50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 16px;
+  animation: sparkleFloat 4s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.sparkle-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.sparkle-2 { top: 20%; right: 15%; animation-delay: 0.8s; }
+.sparkle-3 { bottom: 30%; left: 20%; animation-delay: 1.6s; }
+.sparkle-4 { bottom: 20%; right: 10%; animation-delay: 2.4s; }
+.sparkle-5 { top: 50%; left: 5%; animation-delay: 3.2s; }
+
+/* Oracle scroll with glassmorphism */
+.oracle-scroll {
+  position: relative;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.06), 
     rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  padding: 20px;
+  padding: 25px;
   backdrop-filter: blur(20px);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.1),
     0 0 0 1px var(--mood-primary),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.romantic-tip-card:not(.hidden) {
-  transform: translateY(0);
-  opacity: 1;
-  animation: tipCardReveal 0.8s ease-out;
-}
-
-.tip-card-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.tip-icon {
-  font-size: 20px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  animation: iconFloat 3s ease-in-out infinite;
-}
-
-.tip-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--mood-primary);
-  text-shadow: none;
-  opacity: 0.9;
-}
-
-.tip-card-content {
-  position: relative;
+  animation: scrollGlow 3s ease-in-out infinite alternate;
   z-index: 2;
 }
 
-.tip-text {
-  font-size: 14px;
+.scroll-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.crystal-ball {
+  font-size: 28px;
+  filter: drop-shadow(0 4px 12px var(--mood-glow));
+  animation: crystalPulse 2s ease-in-out infinite;
+}
+
+.oracle-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--mood-primary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.scroll-content {
+  position: relative;
+}
+
+.oracle-border-top,
+.oracle-border-bottom {
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--mood-primary), 
+    var(--mood-secondary), 
+    var(--mood-primary), 
+    transparent);
+  margin: 15px 0;
+  border-radius: 1px;
+  opacity: 0.8;
+}
+
+.oracle-message {
+  text-align: center;
+  padding: 15px 0;
+}
+
+.oracle-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.5;
-  font-weight: 400;
+  line-height: 1.6;
   margin: 0;
-  text-shadow: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  animation: typewriterReveal 3s ease-out;
 }
 
-.tip-card-glow {
+/* Decorative elements */
+.oracle-decoration {
   position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, var(--mood-primary), var(--mood-secondary));
-  border-radius: 17px;
-  opacity: 0.2;
-  filter: blur(4px);
-  z-index: -1;
-  animation: cardGlow 3s ease-in-out infinite alternate;
+  font-size: 20px;
+  animation: decorationFloat 4s ease-in-out infinite;
 }
 
-@keyframes tipCardReveal {
+.oracle-decoration-left {
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+  animation-delay: 0.5s;
+}
+
+.oracle-decoration-right {
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%);
+  animation-delay: 1.5s;
+}
+
+/* Floating mood effects */
+.oracle-mood-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.floating-element {
+  position: absolute;
+  font-size: 14px;
+  animation: floatingHearts 6s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.floating-heart {
+  top: 20%;
+  left: 80%;
+  animation-delay: 0s;
+}
+
+.floating-star {
+  top: 70%;
+  left: 15%;
+  animation-delay: 2s;
+}
+
+.floating-flower {
+  top: 40%;
+  right: 10%;
+  animation-delay: 4s;
+}
+
+/* ========== MAGICAL ANIMATIONS ========== */
+
+@keyframes oracleReveal {
   0% {
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(50px) scale(0.9);
     opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+    opacity: 0.8;
   }
   100% {
     transform: translateY(0) scale(1);
@@ -369,33 +484,87 @@ body {
   }
 }
 
-@keyframes iconFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
+@keyframes sparkleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-10px) rotate(90deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-5px) rotate(180deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-15px) rotate(270deg);
+    opacity: 0.9;
+  }
 }
 
-@keyframes cardGlow {
+@keyframes scrollGlow {
   0% {
-    opacity: 0.15;
-    filter: blur(3px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      0 0 0 1px var(--mood-primary),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   100% {
-    opacity: 0.25;
-    filter: blur(6px);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.15),
+      0 0 0 1px var(--mood-primary),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 }
 
-.romantic-tip-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    0 0 0 1px var(--mood-primary),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+@keyframes crystalPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 12px var(--mood-glow));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 20px var(--mood-glow));
+  }
 }
 
-.romantic-tip-card:hover .tip-card-glow {
-  opacity: 0.3;
-  filter: blur(8px);
+@keyframes typewriterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  20% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes decorationFloat {
+  0%, 100% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-60%) rotate(10deg);
+  }
+}
+
+@keyframes floatingHearts {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translateY(-15px) scale(1.2);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translateY(-8px) scale(0.9);
+    opacity: 0.7;
+  }
 }
 
 .hidden {
@@ -924,11 +1093,14 @@ body.light-theme .heading {
   color: #1a1a1a;
 }
 
-/* Light theme styles for romantic tip card */
-body.light-theme .romantic-tip-card {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.8), 
-    rgba(255, 255, 255, 0.6));
+/* ================================
+   🌞 LIGHT THEME LOVE ORACLE 🌞
+   ================================ */
+
+body.light-theme .oracle-scroll {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.4), 
+    rgba(255, 255, 255, 0.2));
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.08),
@@ -936,24 +1108,22 @@ body.light-theme .romantic-tip-card {
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-body.light-theme .tip-title {
+body.light-theme .oracle-title {
   color: var(--mood-primary);
-  opacity: 0.8;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-body.light-theme .tip-text {
+body.light-theme .oracle-text {
   color: rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
-body.light-theme .tip-icon {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+body.light-theme .crystal-ball {
+  filter: drop-shadow(0 4px 12px var(--mood-glow));
 }
 
-body.light-theme .romantic-tip-card:hover {
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.12),
-    0 0 0 1px var(--mood-primary),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+body.light-theme .sparkle {
+  opacity: 0.5;
 }
 
 body.light-theme .ghost-btn {
@@ -1094,6 +1264,32 @@ body.light-theme .footer {
     max-width: 100%;
     flex-wrap: wrap;
     gap: 12px;
+  }
+
+  /* Love Oracle responsive */
+  .oracle-scroll {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .oracle-title {
+    font-size: 16px;
+  }
+
+  .oracle-text {
+    font-size: 16px;
+  }
+
+  .crystal-ball {
+    font-size: 24px;
+  }
+
+  .sparkle {
+    font-size: 14px;
+  }
+
+  .oracle-decoration {
+    font-size: 18px;
   }
 
   .controls {

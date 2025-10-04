@@ -46,8 +46,8 @@ const app = document.querySelector('.app');
 const moodIndicator = document.getElementById('moodIndicator');
 const moodIcon = document.getElementById('moodIcon');
 const moodLabel = document.getElementById('moodLabel');
-const romanticTipCard = document.getElementById('romanticTipCard');
-const tipText = document.getElementById('tipText');
+const loveOracle = document.getElementById('loveOracle');
+const oracleText = document.getElementById('oracleText');
 
 let confettiEnabled = true;
 let soundEnabled = false;
@@ -258,22 +258,30 @@ function applyMoodTheme(mood) {
   moodIndicator.classList.remove('hidden');
 }
 
-// Show romantic tip with animation
-function showRomanticTip(tip) {
-  tipText.textContent = tip;
-  romanticTipCard.classList.remove('hidden');
-  
-  // Add a slight delay for smooth animation
-  setTimeout(() => {
-    romanticTipCard.style.transform = 'translateY(0)';
-    romanticTipCard.style.opacity = '1';
-  }, 100);
+// Enhanced Oracle Messages with mystical flair
+
+
+// Get mystical oracle message based on mood
+function getMysticalOracleMessage(moodKey) {
+  const messages = ORACLE_MESSAGES[moodKey] || ORACLE_MESSAGES.playful;
+  return messages[Math.floor(Math.random() * messages.length)];
 }
 
-// Hide mood and tip displays
+// Show Love Oracle with magical animation
+function showLoveOracle(message) {
+  oracleText.textContent = message;
+  loveOracle.classList.remove('hidden');
+  
+  // Add typewriter effect delay
+  setTimeout(() => {
+    oracleText.style.animation = 'typewriterReveal 3s ease-out forwards';
+  }, 200);
+}
+
+// Hide mood and oracle displays
 function hideMoodAndTips() {
   moodIndicator.classList.add('hidden');
-  romanticTipCard.classList.add('hidden');
+  loveOracle.classList.add('hidden');
   
   // Remove all mood classes
   Object.values(MOODS).forEach(m => app.classList.remove(m.class));
@@ -508,17 +516,17 @@ function calculateLove() {
 
   // Apply premium mood theme to entire page
   const mood = getMoodForPercent(percent);
-  const tip = getRandomTipForMood(mood.label.toLowerCase());
+  const romanticTip = getRandomTipForMood(mood.label.toLowerCase());
   
   applyMoodTheme(mood);
-  showRomanticTip(tip);
+  showLoveOracle(romanticTip);
 
   // trigger party
   if (confettiEnabled) triggerCelebration(percent);
   if (soundEnabled) playChime(percent);
 
-  // store in history (including mood and tip)
-  saveHistory({name1, name2, percent, msg: message, mood: mood.label, tip, t: Date.now()});
+  // store in history (including mood and romantic tip)
+  saveHistory({name1, name2, percent, msg: message, mood: mood.label, tip: romanticTip, t: Date.now()});
 }
 
 function animateRingTo(targetPercent) {
