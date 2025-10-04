@@ -56,7 +56,6 @@ const downloadImageBtn = document.getElementById('downloadImageBtn');
 const copyImageBtn = document.getElementById('copyImageBtn');
 const nativeShareBtn = document.getElementById('nativeShareBtn');
 
-
 let confettiEnabled = true;
 let soundEnabled = false;
 
@@ -1011,4 +1010,12 @@ copyLinkBtn.addEventListener("click", () => {
   navigator.clipboard.writeText(window.location.href)
     .then(() => alert("Link copied to clipboard!"))
     .catch(() => alert("Failed to copy link"));
+});
+
+historyBtn.addEventListener('click', () => {
+  historyPopupOverlay.classList.remove('hidden');
+});
+
+closeHistoryPopup.addEventListener('click', () => {
+  historyPopupOverlay.classList.add('hidden');
 });
