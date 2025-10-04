@@ -21,6 +21,12 @@
         <span>Love Alchemy</span>
       </div>
 
+      <!-- Mood indicator for entire page -->
+      <div id="moodIndicator" class="mood-indicator hidden">
+        <span id="moodIcon" class="mood-icon">✨</span>
+        <span id="moodLabel" class="mood-label">Playful</span>
+      </div>
+
       <div class="controls">
         <button id="historyBtn" class="ghost-btn" title="View history">📜 History</button>
         <button id="resetBtn" class="ghost-btn" title="Reset inputs">🔁 Reset</button>
@@ -88,6 +94,18 @@
             <div id="heading" class="heading">Waiting for names...</div>
             <div id="description" class="description">Try entering your names and press Calculate.</div>
           </div>
+        </div>
+
+        <!-- Premium Romantic Tip Card -->
+        <div id="romanticTipCard" class="romantic-tip-card hidden">
+          <div class="tip-card-header">
+            <div class="tip-icon">🌟</div>
+            <div class="tip-title">Love Oracle Says</div>
+          </div>
+          <div class="tip-card-content">
+            <p id="tipText" class="tip-text">Your romantic guidance awaits...</p>
+          </div>
+          <div class="tip-card-glow"></div>
         </div>
 
         <div class="extras">

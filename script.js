@@ -41,6 +41,13 @@ const historyList = document.getElementById('historyList');
 const clearHistory = document.getElementById('clearHistory');
 const chime = document.getElementById('chime');
 const themeToggleBtn = document.getElementById('themeToggleBtn');
+// Premium UI elements
+const app = document.querySelector('.app');
+const moodIndicator = document.getElementById('moodIndicator');
+const moodIcon = document.getElementById('moodIcon');
+const moodLabel = document.getElementById('moodLabel');
+const romanticTipCard = document.getElementById('romanticTipCard');
+const tipText = document.getElementById('tipText');
 
 let confettiEnabled = true;
 let soundEnabled = false;
@@ -141,6 +148,152 @@ function messageForPercent(p) {
   if (p >= 50) return "✨ Promising — work & communicate!";
   if (p >= 30) return "🤍 Some sparks — effort required.";
   return "💔 Friendly vibes — maybe best as friends.";
+}
+
+/* ============================
+    Mood & Tips System
+   ============================ */
+
+// Mood data with icons and CSS classes
+const MOODS = {
+  dreamy: { icon: '💫', label: 'Dreamy', class: 'mood-dreamy' },
+  passionate: { icon: '🔥', label: 'Passionate', class: 'mood-passionate' },
+  adventurous: { icon: '🌟', label: 'Adventurous', class: 'mood-adventurous' },
+  flirty: { icon: '😍', label: 'Flirty', class: 'mood-flirty' },
+  playful: { icon: '✨', label: 'Playful', class: 'mood-playful' },
+  curious: { icon: '🤔', label: 'Curious', class: 'mood-curious' },
+  friendly: { icon: '😊', label: 'Friendly', class: 'mood-friendly' },
+  chill: { icon: '🤝', label: 'Chill', class: 'mood-chill' }
+};
+
+// Mood-specific tip collections
+const MOOD_TIPS = {
+  dreamy: [
+    "🌙 Stargaze together tonight",
+    "💌 Write them a heartfelt letter",
+    "🎵 Create a dreamy playlist for them",
+    "🌸 Leave a sweet note on their pillow",
+    "☁️ Plan a cozy afternoon nap together"
+  ],
+  passionate: [
+    "💋 Surprise them with a passionate kiss",
+    "🌹 Leave rose petals on their path",
+    "🕯️ Set up a candlelit dinner",
+    "💃 Dance together to your favorite song",
+    "🔥 Write them a love poem"
+  ],
+  adventurous: [
+    "🗺️ Plan a spontaneous mini-adventure",
+    "🥾 Go on an unexpected hike together",
+    "🎢 Try something new and exciting",
+    "📍 Explore a new place in your city",
+    "🎯 Challenge them to a fun competition"
+  ],
+  flirty: [
+    "😉 Send them a cheeky text",
+    "💄 Leave a lipstick mark on their mirror",
+    "🍓 Feed them something sweet",
+    "💐 Surprise them with their favorite flowers",
+    "📱 Send a cute selfie with a flirty caption"
+  ],
+  playful: [
+    "🎈 Plan a silly photo shoot together",
+    "🎮 Have a game night with their favorite games",
+    "🍕 Build a blanket fort and order pizza",
+    "🎭 Do silly impressions of each other",
+    "🧩 Work on a puzzle together"
+  ],
+  curious: [
+    "❓ Ask them about their wildest dream",
+    "📚 Share an interesting article with them",
+    "🔍 Explore a new hobby together",
+    "🎨 Try creating something artistic together",
+    "🌟 Learn something new about each other"
+  ],
+  friendly: [
+    "☕ Share a warm cup of coffee",
+    "🤗 Give them an unexpected hug",
+    "📞 Call them just to hear their voice",
+    "🍪 Bake their favorite treat together",
+    "💬 Have a deep, meaningful conversation"
+  ],
+  chill: [
+    "🛋️ Have a relaxing movie marathon",
+    "🧘 Try meditation or yoga together",
+    "🍵 Enjoy a peaceful tea time",
+    "📖 Read books in comfortable silence",
+    "🌅 Watch the sunrise or sunset together"
+  ]
+};
+
+// Get mood based on compatibility score
+function getMoodForPercent(p) {
+  if (p >= 90) return MOODS.dreamy;
+  if (p >= 80) return MOODS.passionate;
+  if (p >= 70) return MOODS.adventurous;
+  if (p >= 60) return MOODS.flirty;
+  if (p >= 50) return MOODS.playful;
+  if (p >= 40) return MOODS.curious;
+  if (p >= 30) return MOODS.friendly;
+  return MOODS.chill;
+}
+
+// Get random tip based on mood
+function getRandomTipForMood(moodKey) {
+  const tips = MOOD_TIPS[moodKey] || MOOD_TIPS.playful;
+  return tips[Math.floor(Math.random() * tips.length)];
+}
+
+// Apply mood theme to entire page
+function applyMoodTheme(mood) {
+  // Remove all existing mood classes
+  Object.values(MOODS).forEach(m => app.classList.remove(m.class));
+  
+  // Add current mood class
+  app.classList.add(mood.class);
+  
+  // Update mood indicator
+  moodIcon.textContent = mood.icon;
+  moodLabel.textContent = mood.label;
+  moodIndicator.classList.remove('hidden');
+}
+
+// Show romantic tip with animation
+function showRomanticTip(tip) {
+  tipText.textContent = tip;
+  romanticTipCard.classList.remove('hidden');
+  
+  // Add a slight delay for smooth animation
+  setTimeout(() => {
+    romanticTipCard.style.transform = 'translateY(0)';
+    romanticTipCard.style.opacity = '1';
+  }, 100);
+}
+
+// Hide mood and tip displays
+function hideMoodAndTips() {
+  moodIndicator.classList.add('hidden');
+  romanticTipCard.classList.add('hidden');
+  
+  // Remove all mood classes
+  Object.values(MOODS).forEach(m => app.classList.remove(m.class));
+}
+function getRandomTip() {
+  const tips = [
+    "💌 Send a sweet message today",
+    "☕ Plan a surprise coffee date",
+    "🌅 Watch the sunrise together",
+    "🎵 Share your favorite song",
+    "🌸 Leave a cute note somewhere",
+    "🍕 Cook something special together",
+    "📚 Read the same book",
+    "🌙 Stargaze tonight",
+    "🎨 Try a creative activity together",
+    "💐 Surprise with flowers",
+    "🚶‍♀️ Take a romantic walk",
+    "📷 Take a silly photo together"
+  ];
+  return tips[Math.floor(Math.random() * tips.length)];
 }
 
 /* ============================
@@ -353,12 +506,19 @@ function calculateLove() {
   heading.textContent = `${name1} + ${name2}`;
   description.textContent = message;
 
+  // Apply premium mood theme to entire page
+  const mood = getMoodForPercent(percent);
+  const tip = getRandomTipForMood(mood.label.toLowerCase());
+  
+  applyMoodTheme(mood);
+  showRomanticTip(tip);
+
   // trigger party
   if (confettiEnabled) triggerCelebration(percent);
   if (soundEnabled) playChime(percent);
 
-  // store in history
-  saveHistory({name1, name2, percent, msg: message, t: Date.now()});
+  // store in history (including mood and tip)
+  saveHistory({name1, name2, percent, msg: message, mood: mood.label, tip, t: Date.now()});
 }
 
 function animateRingTo(targetPercent) {

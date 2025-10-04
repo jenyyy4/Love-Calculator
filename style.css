@@ -6,6 +6,69 @@
   --accent2: #ff2e63;
   --muted: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(255, 255, 255, 0.06);
+  
+  /* Mood-based theme variables */
+  --mood-primary: var(--accent1);
+  --mood-secondary: var(--accent2);
+  --mood-glow: rgba(255, 122, 122, 0.3);
+  --mood-bg-overlay: rgba(255, 122, 122, 0.02);
+}
+
+/* Mood Theme Variations */
+.app.mood-playful {
+  --mood-primary: var(--accent1);
+  --mood-secondary: var(--accent2);
+  --mood-glow: rgba(255, 122, 122, 0.3);
+  --mood-bg-overlay: rgba(255, 122, 122, 0.02);
+}
+
+.app.mood-dreamy {
+  --mood-primary: var(--accent1);
+  --mood-secondary: var(--accent2);
+  --mood-glow: var(--accent1);
+  --mood-bg-overlay: rgba(168, 85, 247, 0.02);
+}
+
+.app.mood-passionate {
+  --mood-primary: #dc2626;
+  --mood-secondary: #991b1b;
+  --mood-glow: rgba(220, 38, 38, 0.3);
+  --mood-bg-overlay: rgba(220, 38, 38, 0.02);
+}
+
+.app.mood-adventurous {
+  --mood-primary: #dc2626;
+  --mood-secondary: #991b1b;
+  --mood-glow: rgba(220, 38, 38, 0.3);
+  --mood-bg-overlay: rgba(220, 38, 38, 0.02);
+}
+
+.app.mood-flirty {
+  --mood-primary: #ec4899;
+  --mood-secondary: #be185d;
+  --mood-glow: rgba(236, 72, 153, 0.3);
+  --mood-bg-overlay: rgba(236, 72, 153, 0.02);
+}
+
+.app.mood-curious {
+  --mood-primary: #dc2626;
+  --mood-secondary: #991b1b;
+  --mood-glow: rgba(220, 38, 38, 0.3);
+  --mood-bg-overlay: rgba(220, 38, 38, 0.02);
+}
+
+.app.mood-friendly {
+  --mood-primary: #dc2626;
+  --mood-secondary: #991b1b;
+  --mood-glow: rgba(220, 38, 38, 0.3);
+  --mood-bg-overlay: rgba(220, 38, 38, 0.02);
+}
+
+.app.mood-chill {
+  --mood-primary: var(--accent1);
+  --mood-secondary: var(--accent2);
+  --mood-glow: var(--accent1);
+  --mood-bg-overlay: rgba(168, 85, 247, 0.02);
 }
 .social-share {
   margin-top: 1rem;
@@ -79,6 +142,62 @@ body {
     radial-gradient(circle at 20% 10%, rgba(255, 120, 150, 0.08), transparent 10%),
     radial-gradient(circle at 80% 90%, rgba(120, 90, 255, 0.04), transparent 10%);
   filter: blur(30px);
+  transition: all 1s ease;
+}
+
+/* Mood-based background animations */
+.app.mood-playful .bg-ambience {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255, 122, 122, 0.12), transparent 15%),
+    radial-gradient(circle at 80% 90%, rgba(255, 46, 99, 0.08), transparent 15%),
+    radial-gradient(circle at 50% 50%, rgba(255, 182, 193, 0.06), transparent 10%);
+  animation: playfulFloat 6s ease-in-out infinite;
+}
+
+.app.mood-dreamy .bg-ambience {
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.1), transparent 20%),
+    radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.06), transparent 18%),
+    radial-gradient(circle at 10% 60%, rgba(196, 181, 253, 0.05), transparent 12%);
+  animation: dreamyFlow 8s ease-in-out infinite;
+}
+
+.app.mood-passionate .bg-ambience {
+  background-image:
+    radial-gradient(circle at 25% 15%, rgba(220, 38, 38, 0.15), transparent 12%),
+    radial-gradient(circle at 75% 85%, rgba(153, 27, 27, 0.1), transparent 15%),
+    radial-gradient(circle at 50% 30%, rgba(239, 68, 68, 0.08), transparent 10%);
+  animation: passionPulse 4s ease-in-out infinite;
+}
+
+.app.mood-adventurous .bg-ambience {
+  background-image:
+    radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.1), transparent 18%),
+    radial-gradient(circle at 60% 80%, rgba(217, 119, 6, 0.08), transparent 16%),
+    radial-gradient(circle at 80% 40%, rgba(252, 211, 77, 0.06), transparent 12%);
+  animation: adventureSway 7s ease-in-out infinite;
+}
+
+@keyframes playfulFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+}
+
+@keyframes dreamyFlow {
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  33% { transform: translateX(5px) rotate(1deg); }
+  66% { transform: translateX(-5px) rotate(-1deg); }
+}
+
+@keyframes passionPulse {
+  0%, 100% { transform: scale(1); filter: blur(30px); }
+  50% { transform: scale(1.05); filter: blur(25px); }
+}
+
+@keyframes adventureSway {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(0.5deg) scale(1.01); }
+  75% { transform: rotate(-0.5deg) scale(1.01); }
 }
 
 /* layout */
@@ -130,6 +249,157 @@ body {
   font-size: 18px;
   letter-spacing: 0.2px;
   color: #fff
+}
+
+/* Mood Indicator in Header */
+.mood-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--mood-primary), var(--mood-secondary));
+  box-shadow: 0 4px 20px var(--mood-glow);
+  animation: moodGlow 2s ease-in-out infinite alternate;
+  transition: all 0.5s ease;
+}
+
+.mood-icon {
+  font-size: 18px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.mood-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+@keyframes moodGlow {
+  0% {
+    box-shadow: 0 4px 20px var(--mood-glow);
+  }
+  100% {
+    box-shadow: 0 6px 30px var(--mood-glow);
+  }
+}
+
+/* Premium Romantic Tip Card */
+.romantic-tip-card {
+  margin-top: 20px;
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05), 
+    rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 0 0 1px var(--mood-primary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.romantic-tip-card:not(.hidden) {
+  transform: translateY(0);
+  opacity: 1;
+  animation: tipCardReveal 0.8s ease-out;
+}
+
+.tip-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tip-icon {
+  font-size: 20px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.tip-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mood-primary);
+  text-shadow: none;
+  opacity: 0.9;
+}
+
+.tip-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.tip-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+  text-shadow: none;
+}
+
+.tip-card-glow {
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--mood-primary), var(--mood-secondary));
+  border-radius: 17px;
+  opacity: 0.2;
+  filter: blur(4px);
+  z-index: -1;
+  animation: cardGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes tipCardReveal {
+  0% {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes cardGlow {
+  0% {
+    opacity: 0.15;
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 0.25;
+    filter: blur(6px);
+  }
+}
+
+.romantic-tip-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px var(--mood-primary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.romantic-tip-card:hover .tip-card-glow {
+  opacity: 0.3;
+  filter: blur(8px);
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* card */
@@ -305,6 +575,45 @@ body {
 .description {
   color: var(--muted);
   margin-top: 6px
+}
+
+/* Result extras: mood and tips */
+.result-extras {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mood-display, .tip-display {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255, 122, 122, 0.1), rgba(255, 46, 99, 0.1));
+  border: 1px solid rgba(255, 122, 122, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mood-display:hover, .tip-display:hover {
+  background: linear-gradient(135deg, rgba(255, 122, 122, 0.15), rgba(255, 46, 99, 0.15));
+  border-color: rgba(255, 122, 122, 0.3);
+}
+
+.mood-label, .tip-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent1);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.mood-text, .tip-text {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* extras */
@@ -613,6 +922,38 @@ body.light-theme .percent-text {
 
 body.light-theme .heading {
   color: #1a1a1a;
+}
+
+/* Light theme styles for romantic tip card */
+body.light-theme .romantic-tip-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.8), 
+    rgba(255, 255, 255, 0.6));
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px var(--mood-primary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme .tip-title {
+  color: var(--mood-primary);
+  opacity: 0.8;
+}
+
+body.light-theme .tip-text {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+body.light-theme .tip-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+body.light-theme .romantic-tip-card:hover {
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px var(--mood-primary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 body.light-theme .ghost-btn {
