@@ -361,18 +361,31 @@ function calculateLove() {
 }
 
 function animateRingTo(targetPercent) {
-  const current = parseInt(percentText.textContent) || 0;
+  const raw = percentText.textContent || '';
+  const parsed = parseInt(raw.replace(/[^\d]/g, ''), 10);
+  const current = isNaN(parsed) ? 0 : parsed;
+
   const duration = 1100;
   const start = performance.now();
+
+  function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+
   function step(now) {
-    const t = Math.min(1, (now - start)/duration);
-    const eased = t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; // smooth ease
+    const t = Math.min(1, (now - start) / duration);
+    const eased = ease(t);
     const val = Math.round(current + (targetPercent - current) * eased);
+
     setRing(val);
-    if (t < 1) requestAnimationFrame(step);
+    if (t < 1) {
+      requestAnimationFrame(step);
+    } else {
+      setRing(targetPercent);
+      percentText.textContent = `${targetPercent}%`;
+    }
   }
   requestAnimationFrame(step);
 }
+
 
 /* ============================
    Sound
