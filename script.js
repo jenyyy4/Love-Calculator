@@ -285,6 +285,7 @@ function showLoveOracle(message) {
   }, 200);
 }
 
+
 // Hide mood and oracle displays
 function hideMoodAndTips() {
   moodIndicator.classList.add('hidden');
@@ -1035,3 +1036,114 @@ historyBtn.addEventListener('click', () => {
 closeHistoryPopup.addEventListener('click', () => {
   historyPopupOverlay.classList.add('hidden');
 });
+
+
+(function attachHistoryDeleteButtons() {
+  function getKeyFromItem(itemEl) {
+    try {
+      const left = itemEl.querySelector('div:first-child') || itemEl.children[0];
+      const right = itemEl.querySelector('div:last-child') || itemEl.children[itemEl.children.length - 1];
+      let leftText = left ? left.innerText : itemEl.innerText;
+      leftText = leftText.split('\n')[0].trim();
+      const percentMatch = itemEl.innerText.match(/(\d{1,3})\s*%/);
+      const percent = percentMatch ? parseInt(percentMatch[1], 10) : null;
+      return { leftText, percent };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function removeHistoryEntryByKey(key) {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      const arr = JSON.parse(raw);
+      const idx = arr.findIndex(it => {
+        const candidate = `${it.name1} + ${it.name2}`;
+        const a = (candidate || '').trim().toLowerCase();
+        const b = (key.leftText || '').trim().toLowerCase();
+        const percentMatch = it.percent == key.percent;
+        return a === b && percentMatch;
+      });
+      if (idx >= 0) {
+        arr.splice(idx, 1);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+        return true;
+      }
+      if (key.percent != null) {
+        const idx2 = arr.findIndex(it => it.percent == key.percent);
+        if (idx2 >= 0) {
+          arr.splice(idx2, 1);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+          return true;
+        }
+      }
+    } catch (e) {
+      console.error('removeHistoryEntryByKey error', e);
+    }
+    return false;
+  }
+
+  function makeDeleteButton() {
+    const btn = document.createElement('button');
+    btn.className = 'delete-history-btn';
+    btn.title = 'Delete entry';
+    btn.setAttribute('aria-label', 'Delete this history entry');
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 6h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 6v14a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 11v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 11v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 6l1-2h4l1 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>`;
+    return btn;
+  }
+
+  function injectButtonIntoItem(itemEl) {
+    if (itemEl.querySelector('.delete-history-btn')) return;
+    const right = itemEl.querySelector('div:last-child');
+    const btn = makeDeleteButton();
+    btn.addEventListener('click', ev => {
+      ev.stopPropagation();
+      const key = getKeyFromItem(itemEl);
+      itemEl.animate(
+        [
+          { opacity: 1, transform: 'translateX(0) scale(1)' },
+          { opacity: 0, transform: 'translateX(20px) scale(0.98)' }
+        ],
+        { duration: 240, easing: 'cubic-bezier(.2,.8,.2,1)' }
+      );
+      setTimeout(() => {
+        const removed = removeHistoryEntryByKey(key || {});
+        renderHistory();
+        if (!removed) console.warn('Could not deterministically remove entry; storage unchanged.');
+      }, 240);
+    });
+    if (right) {
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.justifyContent = 'flex-end';
+      wrapper.style.marginTop = '6px';
+      wrapper.appendChild(btn);
+      right.appendChild(wrapper);
+    } else {
+      itemEl.appendChild(btn);
+    }
+  }
+
+  const observer = new MutationObserver(mutations => {
+    for (const m of mutations) {
+      if (m.type === 'childList' && m.addedNodes.length) {
+        m.addedNodes.forEach(node => {
+          if (node.nodeType === 1 && node.classList.contains('history-item')) injectButtonIntoItem(node);
+        });
+      }
+    }
+    historyList.querySelectorAll('.history-item').forEach(el => injectButtonIntoItem(el));
+  });
+
+  if (historyList) {
+    observer.observe(historyList, { childList: true, subtree: false });
+    historyList.querySelectorAll('.history-item').forEach(el => injectButtonIntoItem(el));
+  }
+})();
