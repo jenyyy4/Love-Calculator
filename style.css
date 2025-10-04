@@ -631,7 +631,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
   z-index: 2;
 }
 
