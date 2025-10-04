@@ -485,6 +485,11 @@ function makeShareableUrl(name1, name2, percent) {
   return `${base}?${params.toString()}`;
 }
 
+function isValidName(name) {
+  // Allows letters, spaces; rejects numbers, symbols
+ return /^[A-Za-z\s]+$/.test(name.trim());
+}
+
 /* ============================
    Main calculate function
    ============================ */
@@ -499,6 +504,12 @@ function calculateLove() {
     alert('Please enter both names to calculate love ✨');
     return;
   }
+
+  if (!isValidName(name1) || !isValidName(name2)) {
+    alert("Please enter valid names: letters, spaces only.");
+    return;
+  }
+
 
   // Compute numerology numbers
   const num1 = nameToNumber(name1, supportMaster);
@@ -612,6 +623,11 @@ shareBtn.addEventListener('click', (ev) => {
   const num2 = nameToNumber(name2, useMasterEl.checked);
   const combined = combineNumbers(num1, num2, useMasterEl.checked);
   const percent = mapToPercent(combined, num1, num2);
+
+    if (!isValidName(name1) || !isValidName(name2) || !name1 || !name2) {
+    alert("Please enter valid names: letters, spaces only.");
+    return;
+  }
 
   // 1) copy classic URL to clipboard (existing behaviour)
   const url = makeShareableUrl(name1, name2, percent);
