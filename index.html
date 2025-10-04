@@ -8,6 +8,19 @@
   <title>Love Alchemy — Advanced Love Calculator 💘</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'es,fr,en,de,it,pt,ru,zh,ja,ko,ar,hi,tr,pl,nl,sv',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
   <main class="app">
@@ -21,9 +34,16 @@
         <span>Love Alchemy</span>
       </div>
 
+      <!-- Mood indicator for entire page -->
+      <div id="moodIndicator" class="mood-indicator hidden">
+        <span id="moodIcon" class="mood-icon">✨</span>
+        <span id="moodLabel" class="mood-label">Playful</span>
+      </div>
+
       <div class="controls">
         <button id="historyBtn" class="ghost-btn" title="View history">📜 History</button>
         <button id="resetBtn" class="ghost-btn" title="Reset inputs">🔁 Reset</button>
+        <div id="google_translate_element" class="translate-widget"></div>
         <button id="themeToggleBtn" class="ghost-btn" title="Theme">🌙 Theme</button>
       </div>
     </header>
@@ -87,6 +107,47 @@
           <div class="score-meta">
             <div id="heading" class="heading">Waiting for names...</div>
             <div id="description" class="description">Try entering your names and press Calculate.</div>
+          </div>
+        </div>
+
+        <!-- Mystical Love Oracle -->
+        <div id="loveOracle" class="love-oracle hidden " style="margin-top: 4rem; margin-bottom: 4rem;">
+          <div class="oracle-container">
+            <!-- Magical sparkles background -->
+            <div class="oracle-sparkles">
+              <div class="sparkle sparkle-1">✨</div>
+              <div class="sparkle sparkle-2">⭐</div>
+              <div class="sparkle sparkle-3">💫</div>
+              <div class="sparkle sparkle-4">🌟</div>
+              <div class="sparkle sparkle-5">✨</div>
+            </div>
+            
+            <!-- Oracle scroll/parchment -->
+            <div class="oracle-scroll">
+              <div class="scroll-header">
+                <div class="crystal-ball">🔮</div>
+                <div class="oracle-title">Love Oracle Whispers...</div>
+              </div>
+              
+              <div class="scroll-content">
+                <div class="oracle-border-top"></div>
+                <div class="oracle-message">
+                  <p id="oracleText" class="oracle-text">The stars align to reveal your romantic destiny...</p>
+                </div>
+                <div class="oracle-border-bottom"></div>
+              </div>
+              
+              <!-- Decorative elements -->
+              <div class="oracle-decoration oracle-decoration-left">🌹</div>
+              <div class="oracle-decoration oracle-decoration-right">💝</div>
+            </div>
+            
+            <!-- Floating hearts/petals for mood -->
+            <div class="oracle-mood-effects">
+              <div class="floating-element floating-heart">💗</div>
+              <div class="floating-element floating-star">⭐</div>
+              <div class="floating-element floating-flower">🌸</div>
+            </div>
           </div>
         </div>
 
