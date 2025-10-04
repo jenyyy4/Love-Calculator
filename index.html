@@ -24,7 +24,22 @@
       <div class="controls">
         <button id="historyBtn" class="ghost-btn" title="View history">📜 History</button>
         <button id="resetBtn" class="ghost-btn" title="Reset inputs">🔁 Reset</button>
-        <button id="themeToggleBtn" class="ghost-btn" title="Theme">🌙 Theme</button>
+        <div id="themeSelector" class="theme-selector">
+            <button data-theme="dark">🌙</button>
+            <button data-theme="light">☀️</button>
+            <button data-theme="rose">🌹</button>
+            <button data-theme="ocean">🌊</button>
+            <button data-theme="sunset">🌇</button>
+            <button data-theme="galaxy">🌌</button>
+            <button data-theme="forest">🌿</button>
+            <button data-theme="aurora">🌈</button>
+            <button data-theme="candy">🍭</button>
+            <button data-theme="crimson">🔥</button>
+
+        </div>
+</div>
+        
+
       </div>
     </header>
 
@@ -157,6 +172,15 @@
       <button id="nativeShareBtn" class="ghost-btn">Native Share</button>
     </div>
   </div>
+</div>
+
+<div id="perfectMatchOverlay" class="pm-overlay hidden">
+  <div class="pm-popup">
+    <h2>✨ Perfect Match! ✨</h2>
+    <p>A truly cosmic connection! You and your partner are a 100% match.</p>
+    <button id="closePmPopup" class="primary">Awesome!</button>
+  </div>
+
 </div>
 
   <footer class="footer">

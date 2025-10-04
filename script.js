@@ -3,6 +3,7 @@
 
 /* ============================
    Configuration & Helpers
+  
    ============================ */
 
 // Pythagorean letter mapping
@@ -40,8 +41,7 @@ const closeHistoryPopup = document.getElementById('closeHistoryPopup');
 const historyList = document.getElementById('historyList');
 const clearHistory = document.getElementById('clearHistory');
 const chime = document.getElementById('chime');
-const themeToggleBtn = document.getElementById('themeToggleBtn');
-// share preview modal elements
+const themeSelector = document.getElementById('themeSelector');
 const sharePreviewOverlay = document.getElementById('sharePreviewOverlay');
 const closeSharePreview = document.getElementById('closeSharePreview');
 const shareCanvas = document.getElementById('shareCanvas');
@@ -350,20 +350,26 @@ function calculateLove() {
 
   // optional small random jitter for 'surprise' toggle
   if (allowJitter) {
-    const jitter = Math.round(random(-5,5));
+    const jitter = Math.round(random(-5, 5));
     percent = Math.max(1, Math.min(100, percent + jitter));
   }
 
   // UI update: progress ring
-  // animate ring smoothly
   animateRingTo(percent);
   const message = messageForPercent(percent);
   heading.textContent = `${name1} + ${name2}`;
   description.textContent = message;
-
   // trigger party
   if (confettiEnabled) triggerCelebration(percent);
   if (soundEnabled) playChime(percent);
+  
+  if (percent === 100) {
+      // Direct call to show the popup
+      const pmOverlay = document.getElementById('perfectMatchOverlay');
+      if (pmOverlay) {
+          pmOverlay.classList.remove('hidden');
+      }
+  }
 
   // store in history
   saveHistory({name1, name2, percent, msg: message, t: Date.now()});
@@ -557,18 +563,37 @@ clearHistory.addEventListener('click', () => {
 let currentTheme = localStorage.getItem('theme') || 'dark';
 
 function applyTheme(theme) {
-  document.body.classList.toggle('light-theme', theme === 'light');
-  themeToggleBtn.textContent = theme === 'light' ? '☀️ Theme' : '🌙 Theme';
+  // Remove all theme classes first
+  document.body.classList.remove(
+    'light-theme',
+    'rose-theme',
+    'ocean-theme',
+    'sunset-theme',
+    'galaxy-theme',
+    'forest-theme',
+    'aurora-theme',
+    'candy-theme',
+    'crimson-theme'
+  );
+
+    if (theme !== 'dark') {
+    document.body.classList.add(`${theme}-theme`);
+  }
+
+  // Save theme choice
   localStorage.setItem('theme', theme);
   currentTheme = theme;
 }
 
-function toggleTheme() {
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  applyTheme(newTheme);
-}
+themeSelector.addEventListener('click', (event) => {
+  if (event.target.tagName === 'BUTTON' && event.target.dataset.theme) {
+    const newTheme = event.target.dataset.theme;
+    applyTheme(newTheme);
+  }
+});
 
-themeToggleBtn.addEventListener('click', toggleTheme);
+// Apply the saved theme on page load
+applyTheme(currentTheme);
 
 /* initialize */
 renderHistory();
@@ -844,3 +869,22 @@ copyLinkBtn.addEventListener("click", () => {
     .then(() => alert("Link copied to clipboard!"))
     .catch(() => alert("Failed to copy link"));
 });
+
+
+/* ============================
+   Perfect Match Popup Handler
+   ============================ */
+const pmOverlay = document.getElementById('perfectMatchOverlay');
+const closePmPopup = document.getElementById('closePmPopup');
+
+if (closePmPopup && pmOverlay) {
+  closePmPopup.addEventListener('click', () => {
+    pmOverlay.classList.add('hidden');
+  });
+  // Allow closing by clicking the backdrop/overlay
+  pmOverlay.addEventListener('click', (e) => {
+    if (e.target === pmOverlay) {
+      pmOverlay.classList.add('hidden');
+    }
+  });
+}
