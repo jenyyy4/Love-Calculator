@@ -405,7 +405,8 @@ body.light-theme .input-wrap input::placeholder { color: rgba(0,0,0,0.35); }
 body.light-theme .ring-bg { stroke: rgba(0,0,0,0.05); }
 body.light-theme .percent-text { fill: #1a1a1a; }
 body.light-theme .heading { color: #1a1a1a; }
-body.light-theme .ghost-btn { border-color: rgba(0,0,0,0.06); }
+body.light-theme .ghost-btn { background: rgba(209, 204, 204, 0.08); color: #1a1a1a; border-color: rgba(0, 0, 0, 0.417); }
+body.light-theme .ghost-btn:hover {background: rgba(0, 0, 0, 0.178);color: #1a1a1a;border-color: rgba(0, 0, 0, 0.15);transition: all 0.25s ease;}
 body.light-theme .outline { border-color: rgba(0,0,0,0.1); }
 body.light-theme .history-item { background: rgba(0,0,0,0.03); }
 body.light-theme .history-item:hover { background: rgba(0,0,0,0.06); }
