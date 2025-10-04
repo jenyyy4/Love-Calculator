@@ -39,6 +39,7 @@ const historyList = document.getElementById('historyList');
 const clearHistory = document.getElementById('clearHistory');
 const historyBtnEl = document.getElementById('historyBtn');
 const chime = document.getElementById('chime');
+const themeToggleBtn = document.getElementById('themeToggleBtn');
 
 let confettiEnabled = true;
 let soundEnabled = false;
@@ -448,28 +449,47 @@ historyBtn.addEventListener('click', () => {
 clearHistory.addEventListener('click', () => {
   if (confirm('Clear saved history?')) clearHistoryStorage();
 });
+let currentTheme = localStorage.getItem('theme') || 'dark';
+
+function applyTheme(theme) {
+  document.body.classList.toggle('light-theme', theme === 'light');
+  themeToggleBtn.textContent = theme === 'light' ? '☀️ Theme' : '🌙 Theme';
+  localStorage.setItem('theme', theme);
+  currentTheme = theme;
+}
+
+function toggleTheme() {
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(newTheme);
+}
+
+themeToggleBtn.addEventListener('click', toggleTheme);
 
 /* initialize */
 renderHistory();
 setRing(0);
 
-/* respond to URL params for quick sharing */
-(function loadFromUrl() {
+(function init() {
   try {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
     const params = new URLSearchParams(location.search);
     const n1 = params.get('n1');
     const n2 = params.get('n2');
     const p = parseInt(params.get('p'));
+
     if (n1 && n2 && !isNaN(p)) {
       name1El.value = n1;
       name2El.value = n2;
-      // small delay so UI mounts
-      setTimeout(()=> {
+      setTimeout(() => {
         animateRingTo(p);
         heading.textContent = `${n1} + ${n2}`;
         description.textContent = messageForPercent(p);
         triggerCelebration(p);
       }, 600);
     }
-  } catch(e){}
+  } catch (e) {
+    console.error("Error loading theme or URL params:", e);
+  }
 })();
