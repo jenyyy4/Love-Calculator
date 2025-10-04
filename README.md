@@ -1,7 +1,11 @@
-# ❤️ Love Calculator
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+# ❤️ Love Calculator 
 
 A fun web app built with HTML, CSS, and JavaScript that calculates a random "love score" between two names.  
 This project is just for fun — results are not scientific or serious 😄
+
+
 
 ---
 
