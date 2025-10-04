@@ -694,7 +694,7 @@ body {
   color: rgba(255, 255, 255, 0.35)
 }
 
-.input-wrap .label {
+/* .input-wrap .label {
   position: absolute;
   left: 14px;
   top: -10px;
@@ -702,7 +702,32 @@ body {
   color: var(--muted);
   font-size: 12px;
   padding: 0 6px
+} */
+
+.input-wrap .label {
+  position: absolute;
+  left: 14px;
+  top: -10px;
+  background: rgb(75 52 49); 
+  color: #ffffff;
+  font-size: 12px;
+  padding: 0 6px; 
+  border-radius: 6px;
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
+
+.light-theme .input-wrap .label {
+  background: rgb(189 164 162);
+  color: var(--muted);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+}
+
+
 
 .options {
   display: flex;
