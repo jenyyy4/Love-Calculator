@@ -79,6 +79,7 @@ const shareLinkPopupOverlay = document.getElementById('shareLinkPopupOverlay')
 const closeFeedbackPopup = document.getElementById('closeFeedbackPopup')
 const closeShareLinkPopup = document.getElementById('closeShareLinkPopup')
 const closeShareLinkBtn = document.getElementById('closeShareLinkBtn')
+const copyShareLink = document.getElementById('copyShareLink')
 const feedbackForm = document.getElementById('feedbackForm')
 const cancelFeedback = document.getElementById('cancelFeedback')
 const feedbackSuccess = document.getElementById('feedbackSuccess')
@@ -1155,6 +1156,16 @@ shareFacebook.addEventListener('click', () => {
 
 // Copy Link
 copyLinkBtn.addEventListener('click', () => {
+	navigator.clipboard
+		.writeText(window.location.href)
+		.then(() => {
+			document.getElementById('shareLinkInput').value = window.location.href
+			shareLinkPopupOverlay.classList.remove('hidden')
+		})
+		.catch(() => alert('Failed to copy link'))
+})
+
+copyShareLink.addEventListener('click', () => {
 	navigator.clipboard
 		.writeText(window.location.href)
 		.then(() => {
