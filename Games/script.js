@@ -466,6 +466,21 @@ document.getElementById('setLoveBtn').addEventListener('click', () => {
     }
 });
 
+const loveInput = document.getElementById("lovePercentage");
+
+loveInput.addEventListener("input", () => {
+    // Remove all leading zeros
+    loveInput.value = loveInput.value.replace(/^0+(?=\d)/, '');
+
+    let value = parseInt(loveInput.value);
+
+    if (isNaN(value)) return; // allow empty field
+
+    if (value > 100) loveInput.value = 100;
+    if (value < 0) loveInput.value = 0;
+});
+
+
 document.querySelectorAll('.theme-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const theme = e.target.getAttribute('data-theme');
