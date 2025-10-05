@@ -60,12 +60,14 @@
 		align-items: flex-start;
 		gap: 8px;
 	}
-	.history-item > div:last-child {
+
+	.history-item>div:last-child {
 		align-self: stretch;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
+
 	.delete-history-btn {
 		min-width: 40px;
 		padding: 8px;
@@ -128,6 +130,7 @@
 	--mood-glow: var(--accent1);
 	--mood-bg-overlay: rgba(168, 85, 247, 0.02);
 }
+
 .social-share {
 	margin-top: 1rem;
 	display: flex;
@@ -174,6 +177,7 @@
 	visibility: hidden;
 	transition: all 0.2s ease;
 }
+
 .share-preview-overlay:not(.hidden) {
 	opacity: 1;
 	visibility: visible;
@@ -185,8 +189,10 @@
 	align-items: center;
 	padding: 6px 6px 0 6px;
 }
+
 .share-preview {
-	width: 680px; /* smaller, premium preview */
+	width: 680px;
+	/* smaller, premium preview */
 	max-width: 94%;
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
 	border-radius: 16px;
@@ -198,18 +204,21 @@
 	gap: 10px;
 	align-items: center;
 }
+
 .share-body {
 	padding: 8px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 .share-body canvas {
 	width: 540px;
 	height: 540px;
 	border-radius: 12px;
 	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
+
 .share-footer {
 	display: flex;
 	gap: 8px;
@@ -227,6 +236,7 @@
 		width: 96%;
 		padding: 10px;
 	}
+
 	#shareCanvas {
 		width: 100%;
 		height: auto;
@@ -306,34 +316,41 @@ body {
 }
 
 @keyframes playfulFloat {
+
 	0%,
 	100% {
 		transform: translateY(0px) scale(1);
 	}
+
 	50% {
 		transform: translateY(-10px) scale(1.02);
 	}
 }
 
 @keyframes dreamyFlow {
+
 	0%,
 	100% {
 		transform: translateX(0px) rotate(0deg);
 	}
+
 	33% {
 		transform: translateX(5px) rotate(1deg);
 	}
+
 	66% {
 		transform: translateX(-5px) rotate(-1deg);
 	}
 }
 
 @keyframes passionPulse {
+
 	0%,
 	100% {
 		transform: scale(1);
 		filter: blur(30px);
 	}
+
 	50% {
 		transform: scale(1.05);
 		filter: blur(25px);
@@ -341,13 +358,16 @@ body {
 }
 
 @keyframes adventureSway {
+
 	0%,
 	100% {
 		transform: rotate(0deg) scale(1);
 	}
+
 	25% {
 		transform: rotate(0.5deg) scale(1.01);
 	}
+
 	75% {
 		transform: rotate(-0.5deg) scale(1.01);
 	}
@@ -433,6 +453,7 @@ body {
 	0% {
 		box-shadow: 0 4px 20px var(--mood-glow);
 	}
+
 	100% {
 		box-shadow: 0 6px 30px var(--mood-glow);
 	}
@@ -489,21 +510,25 @@ body {
 	left: 10%;
 	animation-delay: 0s;
 }
+
 .sparkle-2 {
 	top: 20%;
 	right: 15%;
 	animation-delay: 0.8s;
 }
+
 .sparkle-3 {
 	bottom: 30%;
 	left: 20%;
 	animation-delay: 1.6s;
 }
+
 .sparkle-4 {
 	bottom: 20%;
 	right: 10%;
 	animation-delay: 2.4s;
 }
+
 .sparkle-5 {
 	top: 50%;
 	left: 5%;
@@ -555,14 +580,12 @@ body {
 .oracle-border-top,
 .oracle-border-bottom {
 	height: 2px;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		var(--mood-primary),
-		var(--mood-secondary),
-		var(--mood-primary),
-		transparent
-	);
+	background: linear-gradient(90deg,
+			transparent,
+			var(--mood-primary),
+			var(--mood-secondary),
+			var(--mood-primary),
+			transparent);
 	margin: 15px 0;
 	border-radius: 1px;
 	opacity: 0.8;
@@ -645,10 +668,12 @@ body {
 		transform: translateY(50px) scale(0.9);
 		opacity: 0;
 	}
+
 	50% {
 		transform: translateY(-5px) scale(1.02);
 		opacity: 0.8;
 	}
+
 	100% {
 		transform: translateY(0) scale(1);
 		opacity: 1;
@@ -656,19 +681,23 @@ body {
 }
 
 @keyframes sparkleFloat {
+
 	0%,
 	100% {
 		transform: translateY(0px) rotate(0deg);
 		opacity: 0.7;
 	}
+
 	25% {
 		transform: translateY(-10px) rotate(90deg);
 		opacity: 1;
 	}
+
 	50% {
 		transform: translateY(-5px) rotate(180deg);
 		opacity: 0.8;
 	}
+
 	75% {
 		transform: translateY(-15px) rotate(270deg);
 		opacity: 0.9;
@@ -680,6 +709,7 @@ body {
 		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--mood-primary),
 			inset 0 1px 0 rgba(255, 255, 255, 0.1);
 	}
+
 	100% {
 		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--mood-primary),
 			inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -687,11 +717,13 @@ body {
 }
 
 @keyframes crystalPulse {
+
 	0%,
 	100% {
 		transform: scale(1);
 		filter: drop-shadow(0 4px 12px var(--mood-glow));
 	}
+
 	50% {
 		transform: scale(1.1);
 		filter: drop-shadow(0 6px 20px var(--mood-glow));
@@ -703,9 +735,11 @@ body {
 		opacity: 0;
 		transform: translateY(10px);
 	}
+
 	20% {
 		opacity: 0.3;
 	}
+
 	100% {
 		opacity: 1;
 		transform: translateY(0);
@@ -713,25 +747,30 @@ body {
 }
 
 @keyframes decorationFloat {
+
 	0%,
 	100% {
 		transform: translateY(-50%) rotate(0deg);
 	}
+
 	50% {
 		transform: translateY(-60%) rotate(10deg);
 	}
 }
 
 @keyframes floatingHearts {
+
 	0%,
 	100% {
 		transform: translateY(0px) scale(1);
 		opacity: 0.6;
 	}
+
 	33% {
 		transform: translateY(-15px) scale(1.2);
 		opacity: 0.8;
 	}
+
 	66% {
 		transform: translateY(-8px) scale(0.9);
 		opacity: 0.7;
@@ -950,6 +989,9 @@ body {
 	font-weight: 700;
 	cursor: pointer;
 	box-shadow: 0 10px 30px rgba(255, 46, 99, 0.12);
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
 }
 
 .primary:active {
@@ -1103,6 +1145,7 @@ body {
 	text-decoration: none !important;
 	transition: all 0.2s ease !important;
 }
+
 .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed {
 	color: gray !important;
 }
@@ -1854,6 +1897,7 @@ body.light-theme .footer {
 		font-size: 12px;
 	}
 }
+
 .social-share {
 	margin-top: 1rem;
 	display: flex;
@@ -1959,6 +2003,7 @@ body.light-theme {
 		transform: translateY(50px);
 		opacity: 0;
 	}
+
 	to {
 		transform: translateY(0);
 		opacity: 1;
@@ -2052,7 +2097,7 @@ body.light-theme {
 	transform: scale(1.2);
 }
 
-.rating-stars .star:hover ~ .star {
+.rating-stars .star:hover~.star {
 	filter: grayscale(100%);
 	opacity: 0.4;
 	transform: scale(1);
@@ -2088,9 +2133,11 @@ body.light-theme {
 	0% {
 		transform: scale(0);
 	}
+
 	50% {
 		transform: scale(1.2);
 	}
+
 	100% {
 		transform: scale(1);
 	}
@@ -2242,6 +2289,7 @@ body.dark-mode .feedback-list-section {
 	opacity: 1;
 	pointer-events: auto;
 }
+
 .custom-alert-box {
 	background: #fff0f5;
 	border: 2px solid #ffb6c1;
