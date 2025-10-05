@@ -742,7 +742,7 @@ body {
 	display: none !important;
 }
 
-/* card */
+/* card with enhanced glassmorphism */
 .card {
 	width: 100%;
 	max-width: 1200px;
@@ -751,16 +751,97 @@ body {
 	gap: 24px;
 	align-items: stretch;
 	z-index: 2;
+	/* Enhanced glassmorphism for entire card container */
+	background: rgba(255, 255, 255, 0.05) !important;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04)) !important;
+	backdrop-filter: blur(40px) saturate(150%) brightness(110%) !important;
+	-webkit-backdrop-filter: blur(40px) saturate(150%) brightness(110%) !important;
+	-moz-backdrop-filter: blur(40px) saturate(150%) brightness(110%) !important;
+	border-radius: 24px;
+	padding: 6px;
+	box-shadow: 
+		0 25px 80px rgba(0, 0, 0, 0.4),
+		0 12px 40px rgba(0, 0, 0, 0.3),
+		inset 0 2px 0 rgba(255, 255, 255, 0.4),
+		inset 0 -2px 0 rgba(255, 255, 255, 0.15),
+		0 0 0 1px rgba(255, 255, 255, 0.3);
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	position: relative;
+}
+
+/* Add subtle animated glow effect */
+.card::before {
+	content: '';
+	position: absolute;
+	inset: -2px;
+	border-radius: 26px;
+	padding: 2px;
+	background: linear-gradient(45deg, 
+		rgba(255, 122, 122, 0.5), 
+		rgba(255, 46, 99, 0.4), 
+		rgba(255, 122, 122, 0.5));
+	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	mask-composite: xor;
+	-webkit-mask-composite: xor;
+	animation: cardGlow 4s ease-in-out infinite alternate;
+	z-index: -1;
+}
+
+/* Ensure glassmorphism works even if backdrop-filter isn't supported */
+.card::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(135deg, 
+		rgba(255, 255, 255, 0.1), 
+		rgba(255, 255, 255, 0.05));
+	border-radius: 24px;
+	z-index: -1;
+	pointer-events: none;
+}
+
+@keyframes cardGlow {
+	0% {
+		opacity: 0.3;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0.6;
+		transform: scale(1.005);
+	}
 }
 
 .card .left,
 .card .right {
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-	backdrop-filter: blur(15px);
+	background: rgba(255, 255, 255, 0.06) !important;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.06)) !important;
+	backdrop-filter: blur(30px) saturate(140%) brightness(105%) !important;
+	-webkit-backdrop-filter: blur(30px) saturate(140%) brightness(105%) !important;
+	-moz-backdrop-filter: blur(30px) saturate(140%) brightness(105%) !important;
 	padding: 22px;
 	border-radius: 18px;
-	box-shadow: 0 8px 40px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
-	border: 1px solid var(--glass-border);
+	box-shadow: 
+		0 15px 40px rgba(0, 0, 0, 0.25),
+		inset 0 2px 0 rgba(255, 255, 255, 0.3),
+		inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	position: relative;
+	overflow: hidden;
+}
+
+/* Add subtle inner glow to card sections */
+.card .left::before,
+.card .right::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(90deg, 
+		transparent,
+		rgba(255, 255, 255, 0.2),
+		transparent);
 }
 
 .card .right {
@@ -1314,10 +1395,45 @@ body.light-theme .logo span {
 	color: #1a1a1a;
 }
 
+/* Light theme glassmorphism card */
+body.light-theme .card {
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.25)) !important;
+	backdrop-filter: blur(40px) saturate(150%) !important;
+	-webkit-backdrop-filter: blur(40px) saturate(150%) !important;
+	box-shadow: 
+		0 25px 80px rgba(0, 0, 0, 0.12),
+		0 12px 40px rgba(0, 0, 0, 0.08),
+		inset 0 2px 0 rgba(255, 255, 255, 0.9),
+		inset 0 -2px 0 rgba(255, 255, 255, 0.5),
+		0 0 0 1px rgba(255, 255, 255, 0.6);
+	border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+body.light-theme .card::before {
+	background: linear-gradient(45deg, 
+		rgba(255, 122, 122, 0.2), 
+		rgba(255, 46, 99, 0.15), 
+		rgba(255, 122, 122, 0.2));
+}
+
 body.light-theme .card .left,
 body.light-theme .card .right {
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.4));
-	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.05);
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2)) !important;
+	backdrop-filter: blur(30px) saturate(140%) !important;
+	-webkit-backdrop-filter: blur(30px) saturate(140%) !important;
+	box-shadow: 
+		0 15px 40px rgba(0, 0, 0, 0.08),
+		inset 0 2px 0 rgba(255, 255, 255, 0.8),
+		inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+body.light-theme .card .left::before,
+body.light-theme .card .right::before {
+	background: linear-gradient(90deg, 
+		transparent,
+		rgba(255, 255, 255, 0.6),
+		transparent);
 }
 
 body.light-theme .input-wrap input {
@@ -1558,9 +1674,15 @@ body.light-theme .footer {
 		order: 1;
 	}
 
+	.card {
+		padding: 4px;
+		border-radius: 20px;
+	}
+
 	.card .left,
 	.card .right {
 		padding: 18px;
+		border-radius: 16px;
 	}
 
 	.inputs {
@@ -1602,9 +1724,15 @@ body.light-theme .footer {
 		padding-top: 24px;
 	}
 
+	.card {
+		padding: 3px;
+		border-radius: 18px;
+	}
+
 	.card .left,
 	.card .right {
 		padding: 16px;
+		border-radius: 15px;
 	}
 
 	.title {
@@ -1689,9 +1817,15 @@ body.light-theme .footer {
 		padding-top: 20px;
 	}
 
+	.card {
+		padding: 2px;
+		border-radius: 16px;
+	}
+
 	.card .left,
 	.card .right {
 		padding: 14px;
+		border-radius: 14px;
 	}
 
 	.ring-wrap {
