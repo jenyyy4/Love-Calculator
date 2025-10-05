@@ -100,19 +100,24 @@ function resizeCanvas() {
 resizeCanvas()
 window.addEventListener('resize', resizeCanvas)
 
+let oracleInterval; 
+
 function typeOracleText(elementId, text, delay = 50) {
     const element = document.getElementById(elementId);
+
+    if (oracleInterval) clearInterval(oracleInterval); // stop any running animation
     element.textContent = '';
+    element.classList.add('oracle-text');
+
     let i = 0;
-    const interval = setInterval(() => {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
+    const chars = [...text]; // splits text into proper Unicode characters
+    oracleInterval = setInterval(() => {
+        if (i < chars.length) {
+            element.textContent += chars[i];
             i++;
         } else {
-            clearInterval(interval);
-			element.style.borderRight = 'none';     // hides the line/cursor after typing
-			element.style.animation = 'none';       // disables the animation
-
+            clearInterval(oracleInterval);
+            element.classList.remove('oracle-text');
         }
     }, delay);
 }
