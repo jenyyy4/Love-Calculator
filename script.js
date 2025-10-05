@@ -56,6 +56,33 @@ const downloadImageBtn = document.getElementById('downloadImageBtn');
 const copyImageBtn = document.getElementById('copyImageBtn');
 const nativeShareBtn = document.getElementById('nativeShareBtn');
 
+
+
+
+const feedbackBtn = document.getElementById('feedbackBtn');
+const feedbackPopupOverlay = document.getElementById('feedbackPopupOverlay');
+const closeFeedbackPopup = document.getElementById('closeFeedbackPopup');
+const feedbackForm = document.getElementById('feedbackForm');
+const cancelFeedback = document.getElementById('cancelFeedback');
+const feedbackSuccess = document.getElementById('feedbackSuccess');
+const feedbackList = document.getElementById('feedbackList');
+const clearFeedbackBtn = document.getElementById('clearFeedback');
+const ratingStars = document.querySelectorAll('.rating-stars .star');
+const feedbackRatingInput = document.getElementById('feedbackRating');
+const feedbackMessage = document.getElementById('feedbackMessage');
+const charCount = document.getElementById('charCount');
+
+
+
+
+
+
+
+
+
+let feedbacks = JSON.parse(localStorage.getItem('lovecalc_feedbacks')) || [];
+
+
 let confettiEnabled = true;
 let soundEnabled = false;
 
@@ -1147,3 +1174,180 @@ closeHistoryPopup.addEventListener('click', () => {
     historyList.querySelectorAll('.history-item').forEach(el => injectButtonIntoItem(el));
   }
 })();
+
+
+
+feedbackBtn.addEventListener('click', () => {
+  feedbackPopupOverlay.classList.remove('hidden');
+  renderFeedbackList();
+});
+
+// Close feedback popup
+closeFeedbackPopup.addEventListener('click', () => {
+  feedbackPopupOverlay.classList.add('hidden');
+  resetFeedbackForm();
+});
+
+cancelFeedback.addEventListener('click', () => {
+  feedbackPopupOverlay.classList.add('hidden');
+  resetFeedbackForm();
+});
+
+// Close on overlay click
+feedbackPopupOverlay.addEventListener('click', (e) => {
+  if (e.target === feedbackPopupOverlay) {
+    feedbackPopupOverlay.classList.add('hidden');
+    resetFeedbackForm();
+  }
+});
+
+// Rating stars functionality
+ratingStars.forEach(star => {
+  star.addEventListener('click', () => {
+    const rating = parseInt(star.getAttribute('data-rating'));
+    feedbackRatingInput.value = rating;
+    
+    ratingStars.forEach(s => {
+      const starRating = parseInt(s.getAttribute('data-rating'));
+      if (starRating <= rating) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
+    });
+  });
+  
+  star.addEventListener('mouseenter', () => {
+    const rating = parseInt(star.getAttribute('data-rating'));
+    ratingStars.forEach(s => {
+      const starRating = parseInt(s.getAttribute('data-rating'));
+      if (starRating <= rating) {
+        s.style.filter = 'grayscale(0%)';
+        s.style.opacity = '1';
+      } else {
+        s.style.filter = 'grayscale(100%)';
+        s.style.opacity = '0.4';
+      }
+    });
+  });
+});
+
+document.querySelector('.rating-stars').addEventListener('mouseleave', () => {
+  const currentRating = parseInt(feedbackRatingInput.value);
+  ratingStars.forEach(s => {
+    const starRating = parseInt(s.getAttribute('data-rating'));
+    if (starRating <= currentRating) {
+      s.style.filter = 'grayscale(0%)';
+      s.style.opacity = '1';
+    } else {
+      s.style.filter = 'grayscale(100%)';
+      s.style.opacity = '0.4';
+    }
+  });
+});
+
+// Character count for textarea
+feedbackMessage.addEventListener('input', () => {
+  charCount.textContent = feedbackMessage.value.length;
+});
+
+// Submit feedback
+feedbackForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById('feedbackName').value.trim() || 'Anonymous';
+  const email = document.getElementById('feedbackEmail').value.trim();
+  const rating = parseInt(feedbackRatingInput.value);
+  const message = feedbackMessage.value.trim();
+  
+  if (rating === 0) {
+    alert('Please select a rating!');
+    return;
+  }
+  
+  if (!message) {
+    alert('Please enter your feedback!');
+    return;
+  }
+  
+  const feedback = {
+    id: Date.now(),
+    name,
+    email,
+    rating,
+    message,
+    date: new Date().toISOString()
+  };
+  
+  feedbacks.unshift(feedback);
+  localStorage.setItem('lovecalc_feedbacks', JSON.stringify(feedbacks));
+  
+  // Show success message
+  feedbackForm.style.display = 'none';
+  feedbackSuccess.classList.remove('hidden');
+  
+  // Play sound if enabled
+  if (soundEnabled) {
+    playChime();
+  }
+  
+  // Reset after 2 seconds
+  setTimeout(() => {
+    feedbackForm.style.display = 'flex';
+    feedbackSuccess.classList.add('hidden');
+    resetFeedbackForm();
+    renderFeedbackList();
+  }, 2000);
+});
+
+// Render feedback list
+function renderFeedbackList() {
+  if (feedbacks.length === 0) {
+    feedbackList.innerHTML = '<p style="text-align:center; color: var(--text-secondary);">No feedback yet. Be the first!</p>';
+    return;
+  }
+  
+  feedbackList.innerHTML = feedbacks.map(fb => {
+    const date = new Date(fb.date);
+    const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const stars = '⭐'.repeat(fb.rating);
+    
+    return `
+      <div class="feedback-item">
+        <div class="feedback-item-header">
+          <span class="feedback-item-name">${escapeHtml(fb.name)}</span>
+          <span class="feedback-item-rating">${stars}</span>
+        </div>
+        <div class="feedback-item-date">${formattedDate}</div>
+        <div class="feedback-item-message">${escapeHtml(fb.message)}</div>
+        ${fb.email ? `<div class="feedback-item-email">${escapeHtml(fb.email)}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+// Clear all feedbacks
+clearFeedbackBtn.addEventListener('click', () => {
+  if (confirm('Are you sure you want to clear all feedback?')) {
+    feedbacks = [];
+    localStorage.removeItem('lovecalc_feedbacks');
+    renderFeedbackList();
+  }
+});
+
+// Reset feedback form
+function resetFeedbackForm() {
+  feedbackForm.reset();
+  feedbackRatingInput.value = '0';
+  ratingStars.forEach(s => s.classList.remove('active'));
+  charCount.textContent = '0';
+  feedbackSuccess.classList.add('hidden');
+  feedbackForm.style.display = 'flex';
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
