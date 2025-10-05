@@ -1259,7 +1259,7 @@ body {
 }
 
 .close-popup {
-	background: rgba(255, 255, 255, 0.05);
+	/* background: rgba(255, 255, 255, 0.05); */
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 50%;
 	width: 32px;
@@ -2043,7 +2043,7 @@ body.light-theme {
 	flex-direction: column;
 	gap: 0.5rem;
 	font-weight: 500;
-	color: var(--text-primary, #333);
+	/* color: var(--text-primary, #333); */
 }
 
 .feedback-label input,
