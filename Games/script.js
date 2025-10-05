@@ -73,25 +73,25 @@ function drawWheel(activeSegments = segments) {
 
 function spinWheel() {
     if (isSpinning) return;
-    
+
     isSpinning = true;
     spinBtn.disabled = true;
-    
+
     const activeSegments = secretModeUnlocked ? destinySegments : segments;
     const numRotations = 5 + Math.random() * 3;
     const randomDegree = Math.random() * 360;
     const totalRotation = numRotations * 360 + randomDegree;
-    
+
     currentRotation += totalRotation;
     canvas.style.transform = `rotate(${currentRotation}deg)`;
-    
+
     setTimeout(() => {
         const normalizedRotation = currentRotation % 360;
         const segmentAngle = 360 / activeSegments.length;
         const adjustedRotation = (360 - normalizedRotation + 90) % 360;
         const segmentIndex = Math.floor(adjustedRotation / segmentAngle) % activeSegments.length;
         const result = activeSegments[segmentIndex];
-        
+
         showResult(result);
         addLovePoints(10);
         boostLoveMeter();
@@ -99,7 +99,7 @@ function spinWheel() {
         isSpinning = false;
         spinBtn.disabled = false;
         spinCount++;
-        
+
         saveProgress();
     }, 4000);
 }
@@ -107,12 +107,12 @@ function spinWheel() {
 function showResult(result) {
     const resultText = document.getElementById('resultText');
     const resultDescription = document.getElementById('resultDescription');
-    
+
     resultText.textContent = result.text;
     resultDescription.textContent = getResultDescription(result.text, lovePercentage);
-    
+
     resultModal.style.display = 'block';
-    
+
     setTimeout(() => {
         handleMiniGame(result.text);
     }, 1000);
@@ -157,11 +157,11 @@ function getResultDescription(resultText, lovePercent) {
             "Eternal Love 💞": "A love story written in the stars! Forever and always! 💞🌠"
         }
     };
-    
+
     if (secretModeUnlocked) {
         return descriptions.destiny[resultText] || "Destiny has chosen you! 💫";
     }
-    
+
     if (lovePercent >= 80) {
         return descriptions.high[resultText] || "Amazing result! Your love is strong! 💖";
     } else if (lovePercent >= 50) {
@@ -189,7 +189,7 @@ function showTruthOrDare() {
         "When did you first realize you were in love?",
         "What's your partner's hidden talent?"
     ];
-    
+
     const dares = [
         "Send a voice message saying 'I love you' in a funny accent",
         "Share your most embarrassing moment with your partner",
@@ -197,10 +197,10 @@ function showTruthOrDare() {
         "Write a short love poem right now",
         "Give your partner 5 genuine compliments"
     ];
-    
+
     const truth = truths[Math.floor(Math.random() * truths.length)];
     const dare = dares[Math.floor(Math.random() * dares.length)];
-    
+
     document.getElementById('miniGameTitle').textContent = "Truth or Dare? ❤️";
     document.getElementById('miniGameContent').innerHTML = `
         <div style="margin: 20px 0;">
@@ -213,7 +213,7 @@ function showTruthOrDare() {
         </div>
         <p style="color: var(--accent); margin-top: 20px;">Choose one and complete it! 💕</p>
     `;
-    
+
     miniGameModal.style.display = 'block';
 }
 
@@ -227,9 +227,9 @@ function showLoveQuote() {
         "I have found the one whom my soul loves. 💍",
         "Every love story is beautiful, but ours is my favorite. ✨"
     ];
-    
+
     const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    
+
     document.getElementById('miniGameTitle').textContent = "Love Quote 💭";
     document.getElementById('miniGameContent').innerHTML = `
         <div class="quote-box">${quote}</div>
@@ -237,7 +237,7 @@ function showLoveQuote() {
             Copy Quote 📋
         </button>
     `;
-    
+
     miniGameModal.style.display = 'block';
 }
 
@@ -260,20 +260,20 @@ function showMemoryGame() {
             options: ["Words of Affirmation", "Quality Time", "Physical Touch", "Acts of Service"]
         }
     ];
-    
+
     const question = questions[Math.floor(Math.random() * questions.length)];
-    
+
     document.getElementById('miniGameTitle').textContent = "Memory Game 🧠";
     document.getElementById('miniGameContent').innerHTML = `
         <p style="font-size: 1.3rem; margin-bottom: 25px;">${question.q}</p>
-        ${question.options.map(opt => 
-            `<button class="quiz-option" onclick="answerQuiz('${opt}')">${opt}</button>`
-        ).join('')}
+        ${question.options.map(opt =>
+        `<button class="quiz-option" onclick="answerQuiz('${opt}')">${opt}</button>`
+    ).join('')}
         <p style="color: var(--accent); margin-top: 20px; font-size: 0.9rem;">
             Choose what you think is correct! 💕
         </p>
     `;
-    
+
     miniGameModal.style.display = 'block';
 }
 
@@ -323,13 +323,13 @@ function launchConfetti() {
     fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
     fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
     fire(0.1, { spread: 120, startVelocity: 45 });
-    
+
     createFloatingHearts();
 }
 
 function createFloatingHearts() {
     const container = document.querySelector('.floating-hearts');
-    
+
     for (let i = 0; i < 20; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart-float';
@@ -338,7 +338,7 @@ function createFloatingHearts() {
         heart.style.animationDelay = Math.random() * 2 + 's';
         heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
         container.appendChild(heart);
-        
+
         setTimeout(() => heart.remove(), 4000);
     }
 }
@@ -347,7 +347,7 @@ function addLovePoints(points) {
     let totalPoints = parseInt(localStorage.getItem('lovePoints') || '0');
     totalPoints += points;
     localStorage.setItem('lovePoints', totalPoints);
-    
+
     document.getElementById('pointsDisplay').textContent = totalPoints;
     updateLoveTitle(totalPoints);
 }
@@ -355,29 +355,29 @@ function addLovePoints(points) {
 function updateLoveTitle(points) {
     const titleEl = document.getElementById('loveTitle');
     let title = "New Player";
-    
+
     if (points >= 1000) title = "Eternal Lovers 💍";
     else if (points >= 500) title = "Perfect Pair 💞";
     else if (points >= 200) title = "Sweet Duo 💕";
     else if (points >= 100) title = "Love Birds 🕊️";
     else if (points >= 50) title = "Cute Couple 💑";
-    
+
     titleEl.textContent = title;
 }
 
 function boostLoveMeter() {
     const currentPercent = parseInt(localStorage.getItem('loveMeterPercent') || lovePercentage);
     const newPercent = Math.min(100, currentPercent + 5);
-    
+
     localStorage.setItem('loveMeterPercent', newPercent);
     updateLoveMeter(newPercent);
-    
+
     const meterContainer = document.querySelector('.love-meter');
     const boostEl = document.createElement('div');
     boostEl.className = 'love-boost';
     boostEl.textContent = '+5% Love Boost 💕';
     meterContainer.appendChild(boostEl);
-    
+
     setTimeout(() => boostEl.remove(), 2000);
 }
 
@@ -400,12 +400,12 @@ function checkSecretMode() {
 function switchTheme(theme) {
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    
+
     document.querySelectorAll('.theme-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector(`[data-theme="${theme}"]`).classList.add('active');
-    
+
     drawWheel(secretModeUnlocked ? destinySegments : segments);
 }
 
@@ -419,7 +419,7 @@ function shareToWhatsApp() {
 function copyResult() {
     const resultText = document.getElementById('resultText').textContent;
     const message = `I got "${resultText}" on the Wheel of Love! 💕`;
-    
+
     navigator.clipboard.writeText(message).then(() => {
         alert('Result copied to clipboard! 📋💕');
     });
@@ -434,18 +434,18 @@ function loadProgress() {
     const savedTheme = localStorage.getItem('theme') || 'romantic';
     const savedLovePercent = parseInt(localStorage.getItem('loveMeterPercent') || '50');
     const savedSecretMode = localStorage.getItem('secretMode') === 'true';
-    
+
     document.getElementById('pointsDisplay').textContent = savedPoints;
     updateLoveTitle(savedPoints);
     updateLoveMeter(savedLovePercent);
     switchTheme(savedTheme);
-    
+
     if (savedSecretMode && savedLovePercent === 100) {
         secretModeUnlocked = true;
         drawWheel(destinySegments);
         spinBtn.textContent = 'SPIN DESTINY WHEEL 💫';
     }
-    
+
     spinCount = parseInt(localStorage.getItem('spinCount') || '0');
 }
 
@@ -454,7 +454,7 @@ spinBtn.addEventListener('click', spinWheel);
 document.getElementById('setLoveBtn').addEventListener('click', () => {
     const input = document.getElementById('lovePercentage');
     const value = parseInt(input.value);
-    
+
     if (value >= 0 && value <= 100) {
         lovePercentage = value;
         updateLoveMeter(value);
@@ -501,7 +501,7 @@ function createBackgroundHearts() {
         heart.style.left = Math.random() * 100 + '%';
         heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
         container.appendChild(heart);
-        
+
         setTimeout(() => heart.remove(), 4000);
     }, 800);
 }
