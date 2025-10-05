@@ -1965,10 +1965,10 @@ body.light-theme {
 }
 
 /* ============================================
-   FEEDBACK POPUP STYLES
+   FEEDBACK POPUP STYLES && SHARE LINK POPUP STYLES
    ============================================ */
 
-.feedback-popup-overlay {
+.feedback-popup-overlay, .sharelink-popup-overlay {
 	position: fixed;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.7);
@@ -1981,9 +1981,10 @@ body.light-theme {
 	animation: fadeIn 0.3s ease;
 }
 
-.feedback-popup-overlay.hidden {
+.feedback-popup-overlay.hidden, .sharelink-popup-overlay.hidden {
 	display: none;
 }
+
 
 .feedback-popup {
 	background: var(--card-bg, #fff);
@@ -2038,7 +2039,7 @@ body.light-theme {
 	gap: 1.5rem;
 }
 
-.feedback-label {
+.feedback-label, .shareLink-label {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
@@ -2046,7 +2047,7 @@ body.light-theme {
 	color: var(--text-primary, #333);
 }
 
-.feedback-label input,
+.feedback-label input, .shareLink-label input,
 .feedback-label textarea {
 	padding: 0.75rem;
 	border: 2px solid var(--border-color, #e0e0e0);
