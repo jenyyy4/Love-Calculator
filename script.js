@@ -100,6 +100,24 @@ function resizeCanvas() {
 resizeCanvas()
 window.addEventListener('resize', resizeCanvas)
 
+function typeOracleText(elementId, text, delay = 50) {
+    const element = document.getElementById(elementId);
+    element.textContent = '';
+    let i = 0;
+    const interval = setInterval(() => {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+			element.style.borderRight = 'none';     // hides the line/cursor after typing
+			element.style.animation = 'none';       // disables the animation
+
+        }
+    }, delay);
+}
+
+
 /* ============================
    Numerology Logic
    ============================ */
@@ -321,7 +339,8 @@ function getMysticalOracleMessage(moodKey) {
 
 // Show Love Oracle with magical animation
 function showLoveOracle(message) {
-	oracleText.textContent = message
+	// oracleText.textContent = message
+	typeOracleText('oracleText', message, 50);
 	loveOracle.classList.remove('hidden')
 
 	// Add typewriter effect delay

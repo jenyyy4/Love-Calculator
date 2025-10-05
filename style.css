@@ -478,6 +478,18 @@ body {
 	transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.oracle-text {
+    border-right: 2px solid transparent;
+    animation: blink-caret 0.7s steps(1) infinite;
+}
+
+@keyframes blink-caret {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: orange; }
+}
+
+
+
 .love-oracle:not(.hidden) {
 	transform: translateY(0);
 	opacity: 1;
