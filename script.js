@@ -1538,71 +1538,76 @@ function escapeHtml(text) {
 
 /* ============================
   Love-Card Generator
-   ============================ */
+============================ */
 
 document.getElementById('generateLoveCard').addEventListener('click', async function() {
     
-    const percentText = document.getElementById('percentText').textContent;
-    
-    if (percentText === '0%') {
-        alertDialog('Please calculate love compatibility first!', 'Notice');
-        return;
-    }
-    
+  const percentText = document.getElementById('percentText').textContent;
+
+  if (percentText === '0%') {
+    alertDialog('Please calculate love compatibility first!', 'Notice');
+    return;
+  }
+
     //required elements to be captured in the love-card
-    const resultArea = document.querySelector('.result-area');
-    const loveOracle = document.getElementById('loveOracle');
+  const resultArea = document.querySelector('.result-area');
+  const loveOracle = document.getElementById('loveOracle');
 
     
     // check if oracle is visible and can be included
-    const includeOracle = !loveOracle.classList.contains('hidden');
-    
-    try {
-        // Create a temporary container with proper styling
-        const wrapper = document.createElement('div');
-        wrapper.style.cssText = `
-            position: absolute;
-            left: -99999px;
-            top: 0;
-            width: 600px;
-            padding: 40px;
-            background: linear-gradient(135deg, #2b0f1e 0%, #1c0a12 100%);
-            border-radius: 20px;
-            box-sizing: border-box;
-        `;
-        
+  const includeOracle = !loveOracle.classList.contains('hidden');
+
+  try {
+    // ✅ Lazy-load html2canvas if not already loaded
+    if (typeof html2canvas === 'undefined') {
+      await loadHtml2Canvas();
+    }
+
+    // Create a temporary container with proper styling
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `
+      position: absolute;
+      left: -99999px;
+      top: 0;
+      width: 600px;
+      padding: 40px;
+      background: linear-gradient(135deg, #2b0f1e 0%, #1c0a12 100%);
+      border-radius: 20px;
+      box-sizing: border-box;
+    `;
+
         // Clone and add result area
-          const resultClone = resultArea.cloneNode(true);
-          resultClone.style.cssText = 'margin: 0; padding: 20px 0;';
-          wrapper.appendChild(resultClone);
+    const resultClone = resultArea.cloneNode(true);
+    resultClone.style.cssText = 'margin: 0; padding: 20px 0;';
+    wrapper.appendChild(resultClone);
 
         // Clone and add oracle if visible
-        if (includeOracle) {
+    if (includeOracle) {
     
-          const oracleClone = loveOracle.cloneNode(true);
-          oracleClone.classList.remove('hidden');
+      const oracleClone = loveOracle.cloneNode(true);
+      oracleClone.classList.remove('hidden');
           oracleClone.style.cssText = 'margin-top: 2rem; display: block !important; opacity: 1 !important;';
     
             // increasing opacity
             const allElements = oracleClone.querySelectorAll('*');
             allElements.forEach(e => {
-                e.style.opacity = '1';
-                e.style.animation = 'none';
-            });
+        e.style.opacity = '1';
+        e.style.animation = 'none';
+      });
     
-            wrapper.appendChild(oracleClone);
-            console.log('Oracle cloned and added');
+      wrapper.appendChild(oracleClone);
+      console.log('Oracle cloned and added');
                 }
           else {
               console.log('Failed to capture Oracle');
-          }
-        
+    }
+
         //appending wrapper to body
-        document.body.appendChild(wrapper);
+    document.body.appendChild(wrapper);
         
         // waiting for styles to apply
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
+    await new Promise(resolve => setTimeout(resolve, 100));
+
         if (typeof html2canvas === 'undefined') {
             throw new Error('html2canvas library not loaded');
         }
@@ -1610,55 +1615,71 @@ document.getElementById('generateLoveCard').addEventListener('click', async func
         
         
         // capture the screenshot with html2canvas
-        const canvas = await html2canvas(wrapper, {
-            backgroundColor: '#2b0f1e',
-            scale: 2,
-            logging: true,
-            useCORS: true,
-            allowTaint: true,
-            width: wrapper.offsetWidth,
+    const canvas = await html2canvas(wrapper, {
+      backgroundColor: '#2b0f1e',
+      scale: 2,
+      logging: true,
+      useCORS: true,
+      allowTaint: true,
+      width: wrapper.offsetWidth,
             height: wrapper.offsetHeight
-        });
-        
+    });
+
         //removing the temporary wrapper
-        document.body.removeChild(wrapper);
-        
+    document.body.removeChild(wrapper);
+
         // blob conversion
-        canvas.toBlob(function(blob) {
+    canvas.toBlob(function(blob) {
             
             
-            if (!blob) {
-                alertDialog('Failed to generate image blob.', 'Error');
-                return;
-            }
+      if (!blob) {
+        alertDialog('Failed to generate image blob.', 'Error');
+        return;
+      }
+            
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const name1 = document.getElementById('name1').value.replace(/[^a-z0-9]/gi, '_') || 'You';
+      const name2 = document.getElementById('name2').value.replace(/[^a-z0-9]/gi, '_') || 'Crush';
+      const filename = `love-card-${name1}-${name2}-${Date.now()}.png`;
+      link.download = filename;
+      link.href = url;
             
             
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            const name1 = document.getElementById('name1').value.replace(/[^a-z0-9]/gi, '_') || 'You';
-            const name2 = document.getElementById('name2').value.replace(/[^a-z0-9]/gi, '_') || 'Crush';
-            const filename = `love-card-${name1}-${name2}-${Date.now()}.png`;
-            link.download = filename;
-            link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(() => URL.revokeObjectURL(url), 100);
             
             
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            setTimeout(() => URL.revokeObjectURL(url), 100);
-            
-            
-            alertDialog('Love Card downloaded successfully! 💖', 'Success');
-        }, 'image/png');
+      alertDialog('Love Card downloaded successfully! 💖', 'Success');
+    }, 'image/png');
         
     } 
     catch (error) {
-        alertDialog('Failed to generate love card. Error: ' + error.message, 'Error');
+    alertDialog('Failed to generate love card. Error: ' + error.message, 'Error');
+  }
+});
+
+/* ============================
+  Lazy Load html2canvas
+============================ */
+
+async function loadHtml2Canvas() {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[data-html2canvas]');
+    if (existing) {
+      existing.addEventListener('load', resolve);
+      existing.addEventListener('error', reject);
+      return;
     }
 });
 
-// Love quotes 
+/* ============================
+        Daily Love Quotes 
+============================ */
 
 
 document.addEventListener("DOMContentLoaded", async () => {

@@ -488,8 +488,6 @@ body {
     50% { border-color: orange; }
 }
 
-
-
 .love-oracle:not(.hidden) {
 	transform: translateY(0);
 	opacity: 1;
@@ -1135,45 +1133,37 @@ body {
 
 /* Google Translate Widget Styling */
 .translate-widget {
-	display: inline-block;
+  font-family: 'Poppins', sans-serif !important;
+  display: inline-block;
+  background: linear-gradient(135deg, #ff1744, #ff4081);
+  border-radius: 10px;
+  padding: 6px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-#google_translate_element {
-	display: inline-block;
+.translate-widget:hover{
+	background: linear-gradient(135deg, #ff4081, #ff1744);
 }
 
-#google_translate_element .goog-te-gadget {
-	font-family: inherit !important;
-	font-size: 13px !important;
+/* The select button (Google adds this) */
+.goog-te-gadget-simple {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 15px !important;
+  color: white !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
 }
 
-#google_translate_element .goog-te-gadget-simple {
-	background-color: transparent !important;
-	border: 1px solid rgba(255, 255, 255, 0.04) !important;
-	padding: 8px 10px !important;
-	border-radius: 10px !important;
-	font-size: 13px !important;
-	color: var(--accent2) !important;
-	text-decoration: none !important;
-	transition: all 0.2s ease !important;
+/* The text inside (e.g. 'Select Language') */
+.goog-te-gadget-simple span {
+  color: white !important;
+  font-weight: 600 !important;
 }
 
-.goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed {
-	color: gray !important;
-}
-
-#google_translate_element .goog-te-gadget-simple:hover {
-	background-color: rgba(255, 255, 255, 0.02) !important;
-	border-color: rgba(255, 255, 255, 0.08) !important;
-	transform: translateY(-1px) !important;
-}
-
-#google_translate_element .goog-te-gadget-simple .goog-te-menu-value {
-	color: var(--muted) !important;
-}
-
-#google_translate_element .goog-te-gadget-simple .goog-te-menu-value span {
-	color: var(--muted) !important;
+/* Remove Google icon if you want */
+.goog-te-gadget-icon {
+  display: none !important;
 }
 
 /* Hide Google Translate banner */
