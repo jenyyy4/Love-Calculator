@@ -51,17 +51,14 @@ Logic can be easily customized by contributors!
 
 ## 🔮 Future Enhancements
 
-🎭 Add animations & emojis 🎉
+📲 PWA (Progressive Web App) 
+ 
+🎨 Custom Theme Picker 
 
-🧠 Better scoring algorithm (numerology-based)
+💬 Chatbot / Love Guru Mode
 
-🌙 Dark/Light mode toggle
+🎙️ Voice Input / Output 
 
-💬 Dynamic messages for different score ranges
-
-📤 Share results feature
-
-🌈 Color themes customization
 
 ## 🤝 Contributing
 
@@ -73,9 +70,7 @@ Look for issues labeled hacktoberfest or good-first-issue
 Check the help-wanted tag for specific needs
 
 ## 📝 Contribution Steps:
-⭐ Star the repository (Required)
-
-👤 Follow my profile (Required)
+⭐ Star the repository 
 
 🍴 Fork the repository
 
@@ -96,7 +91,7 @@ git push origin amazing-feature
 ```
 🔔 Open a Pull Request
 
-# ⚠️ IMPORTANT: Your PR will only be accepted if you've starred the repo and followed my profile!
+
 
 ## 📄 License
 This project is licensed under the MIT License — see the LICENSE file for details.
