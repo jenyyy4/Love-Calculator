@@ -70,9 +70,7 @@ Look for issues labeled hacktoberfest or good-first-issue
 Check the help-wanted tag for specific needs
 
 ## 📝 Contribution Steps:
-⭐ Star the repository (Required)
-
-👤 Follow my profile (Required)
+⭐ Star the repository 
 
 🍴 Fork the repository
 
