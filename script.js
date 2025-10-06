@@ -1122,6 +1122,7 @@ function drawMiniHearts(ctx, x, y) {
 const shareWhatsapp = document.getElementById('shareWhatsapp')
 const shareTwitter = document.getElementById('shareTwitter')
 const shareFacebook = document.getElementById('shareFacebook')
+const shareInstagram = document.getElementById('shareInstagram')
 const copyLinkBtn = document.getElementById('copyLinkBtn')
 
 function getShareText() {
@@ -1149,6 +1150,32 @@ shareFacebook.addEventListener('click', () => {
 	const url = encodeURIComponent(window.location.href)
 	shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`
 })
+
+// Instagram
+shareInstagram.addEventListener('click', () => {
+    const pageUrl = window.location.href;
+
+    navigator.clipboard.writeText(pageUrl).then(() => {
+        // --- This part gives the user feedback ---
+
+        // 1. Let the user know the link was copied successfully
+        alert('Link copied! You can now paste it into your Instagram story or bio.');
+
+        // 2. (Optional) Temporarily change the button's text
+        const originalText = shareInstagram.textContent;
+        shareInstagram.textContent = 'Copied!';
+
+        // 3. Change it back after a few seconds
+        setTimeout(() => {
+            shareInstagram.textContent = originalText;
+        }, 3000); // 3000 milliseconds = 3 seconds
+
+    }).catch(err => {
+        // If it fails, log the error and inform the user
+        console.error('Failed to copy the link:', err);
+        alert('Sorry, we could not copy the link to your clipboard.');
+    });
+});
 
 // Copy Link
 copyLinkBtn.addEventListener('click', () => {
