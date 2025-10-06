@@ -4,14 +4,14 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	<!-- SEO basics -->
-  	<meta name="description" content="Love Alchemy — Discover love compatibility using numerology, fun animations, and shareable results. Find out your soul chemistry today!">
-  	<meta name="keywords" content="love calculator, numerology love, love compatibility, love test, soulmate calculator, romantic compatibility, Love Alchemy">
+	<meta name="description"
+		content="Love Alchemy — Discover love compatibility using numerology, fun animations, and shareable results. Find out your soul chemistry today!">
+	<meta name="keywords"
+		content="love calculator, numerology love, love compatibility, love test, soulmate calculator, romantic compatibility, Love Alchemy">
 	<link rel="icon" href="hearts.png" type="image/x-icon" />
 	<title>Love Alchemy — Advanced Love Calculator 💘</title>
 	<link rel="stylesheet" href="style.css" />
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet" />
-	<!-- Google Translate -->
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
 			new google.translate.TranslateElement(
@@ -33,10 +33,9 @@
 		<div class="bg-ambience"></div>
 		<header class="top">
 			<div class="logo">
-				<img src="/logo.svg" alt="" srcset="" width="200px" />
+				<img src="/logo.svg" alt="Love Alchemy Logo" srcset="" width="200px" />
 			</div>
 
-			<!-- Mood indicator for entire page -->
 			<div id="moodIndicator" class="mood-indicator hidden">
 				<span id="moodIcon" class="mood-icon">✨</span>
 				<span id="moodLabel" class="mood-label">Playful</span>
@@ -52,7 +51,6 @@
 		</header>
 
 		<section class="card">
-			<!-- Alert Dialog -->
 			<div id="customAlert" class="custom-alert-overlay">
 				<div class="custom-alert-box">
 					<h2 id="alertTitle">Notice</h2>
@@ -82,8 +80,7 @@
 
 					<div class="options">
 						<label><input type="checkbox" id="allowJitter" /> Allow small surprise (±5%)</label>
-						<label><input type="checkbox" id="useMaster" checked /> Support master numbers
-							(11,22,33)</label>
+						<label><input type="checkbox" id="useMaster" checked /> Support master numbers (11,22,33)</label>
 					</div>
 
 					<div class="actions">
@@ -92,16 +89,13 @@
 						<a href="./Games/index.html" class="primary NG">Love Spinner ❤️</a>
 					</div>
 
-
-					<!-- Social share buttons -->
 					<div class="social-share">
 						<p>Share your love result:</p>
 						<a href="#" id="shareWhatsapp" target="_blank" title="Share on WhatsApp">📱 WhatsApp</a>
 						<a href="#" id="shareTwitter" target="_blank" title="Share on Twitter">🐦 Twitter</a>
 						<a href="#" id="shareFacebook" target="_blank" title="Share on Facebook">📘 Facebook</a>
-						<a href="#" id="shareInstagram" title="Share on Instagram">📷 Instagram</a>
 						<button id="copyLinkBtn" title="Copy link">🔗 Copy Link</button>
-            <button id="generateLoveCard">♥️ Generate Love-Card</button>
+						<button id="generateLoveCard">♥️ Generate Love-Card</button>
 					</div>
 				</form>
 
@@ -119,9 +113,7 @@
 								stroke="url(#g1)" stroke-linecap="round" stroke-dasharray="0 999" />
 							<g class="text-layer">
 								<text id="percentText" class="percent-text" x="50%" y="50%" dominant-baseline="middle"
-									text-anchor="middle">
-									--%
-								</text>
+									text-anchor="middle">--%</text>
 							</g>
 						</svg>
 					</div>
@@ -134,10 +126,8 @@
 					</div>
 				</div>
 
-				<!-- Mystical Love Oracle -->
 				<div id="loveOracle" class="love-oracle hidden" style="margin-top: 4rem; margin-bottom: 4rem">
 					<div class="oracle-container">
-						<!-- Magical sparkles background -->
 						<div class="oracle-sparkles">
 							<div class="sparkle sparkle-1">✨</div>
 							<div class="sparkle sparkle-2">⭐</div>
@@ -145,14 +135,11 @@
 							<div class="sparkle sparkle-4">🌟</div>
 							<div class="sparkle sparkle-5">✨</div>
 						</div>
-
-						<!-- Oracle scroll/parchment -->
 						<div class="oracle-scroll">
 							<div class="scroll-header">
 								<div class="crystal-ball">🔮</div>
 								<div class="oracle-title">Love Oracle Whispers...</div>
 							</div>
-
 							<div class="scroll-content">
 								<div class="oracle-border-top"></div>
 								<div class="oracle-message">
@@ -162,13 +149,9 @@
 								</div>
 								<div class="oracle-border-bottom"></div>
 							</div>
-
-							<!-- Decorative elements -->
 							<div class="oracle-decoration oracle-decoration-left">🌹</div>
 							<div class="oracle-decoration oracle-decoration-right">💝</div>
 						</div>
-
-						<!-- Floating hearts/petals for mood -->
 						<div class="oracle-mood-effects">
 							<div class="floating-element floating-heart">💗</div>
 							<div class="floating-element floating-star">⭐</div>
@@ -209,7 +192,6 @@
 		<audio id="chime" src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAA..."></audio>
 	</main>
 
-	<!-- History Popup Modal -->
 	<div class="history-popup-overlay hidden" id="historyPopupOverlay">
 		<div class="history-popup" id="historyPanel">
 			<div class="history-popup-header">
@@ -234,13 +216,8 @@
 				<button class="close-popup" id="closeSharePreview" title="Close">✕</button>
 			</div>
 			<div class="share-body">
-				<canvas id="shareCanvas" width="900" height="900" style="
-							max-width: 100%;
-							height: auto;
-							border-radius: 12px;
-							display: block;
-							margin: 0 auto;
-						"></canvas>
+				<canvas id="shareCanvas" width="900" height="900"
+					style="max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 auto;"></canvas>
 			</div>
 			<div class="share-footer">
 				<button id="downloadImageBtn" class="primary">Download Image</button>
@@ -250,7 +227,6 @@
 		</div>
 	</div>
 
-	<!-- Feedback Popup Modal -->
 	<div class="feedback-popup-overlay hidden" id="feedbackPopupOverlay">
 		<div class="feedback-popup" id="feedbackPanel">
 			<div class="feedback-popup-header">
@@ -263,12 +239,10 @@
 						Name
 						<input type="text" id="feedbackName" placeholder="Your name" maxlength="50" />
 					</label>
-
 					<label for="feedbackEmail" class="feedback-label">
 						Email (Optional)
 						<input type="email" id="feedbackEmail" placeholder="your@email.com" maxlength="100" />
 					</label>
-
 					<label for="feedbackRating" class="feedback-label">
 						Rating
 						<div class="rating-stars" id="ratingStars">
@@ -280,59 +254,35 @@
 						</div>
 						<input type="hidden" id="feedbackRating" value="0" />
 					</label>
-
 					<label for="feedbackMessage" class="feedback-label">
 						Your Feedback *
 						<textarea id="feedbackMessage" placeholder="Tell us what you think..." rows="5" maxlength="500"
 							required></textarea>
 						<span class="char-count"><span id="charCount">0</span>/500</span>
 					</label>
-
 					<div class="feedback-actions">
 						<button type="submit" class="primary">Submit Feedback ✨</button>
 						<button type="button" id="cancelFeedback" class="outline">Cancel</button>
 					</div>
 				</form>
-
 				<div id="feedbackSuccess" class="feedback-success hidden">
 					<div class="success-icon">✅</div>
 					<h4>Thank you for your feedback!</h4>
 					<p>We appreciate you taking the time to share your thoughts.</p>
 				</div>
-
 				<div class="feedback-list-section">
 					<h4>Recent Feedback</h4>
 					<div id="feedbackList" class="feedback-list"></div>
-					<!-- <button id="clearFeedback" class="outline">Clear All Feedback</button> -->
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- ShareLink Popup Modal -->
-	<div class="sharelink-popup-overlay hidden" id="shareLinkPopupOverlay">
-		<div class="feedback-popup" id="shareLinkPanel">
-			<div class="feedback-popup-header">
-				<h3>🔗 Share Link</h3>
-				<button class="close-popup" id="closeShareLinkPopup" title="Close">✕</button>
-			</div>
-			<div class="feedback-popup-content">
-				<form id="shareLinkForm" class="feedback-form">
-					<div>
-						<p>The link has been copied to your clipboard!</p>
-						<p>You can share it with your friends to show your love compatibility result. 💖</p>
-					</div>
-					<label for="shareLinkInput" class="shareLink-label">
-						Shareable Link
-						<input type="text" id="shareLinkInput" readonly />
-					</label>
-
-					<div class="feedback-actions">
-						<button type="button" id="copyShareLink" class="primary">Copy Link</button>
-						<button type="button" id="closeShareLink" class="outline">Close</button>
-					</div>
-				</form>
-			</div>
+	<div id="perfectMatchOverlay" class="pm-overlay hidden">
+		<div class="pm-popup">
+			<h2>✨ Perfect Match! ✨</h2>
+			<p>A truly cosmic connection! You and your partner are a 100% match.</p>
+			<button id="closePmPopup" class="primary">Awesome!</button>
 		</div>
 	</div>
 
@@ -342,6 +292,8 @@
 		</div>
 	</footer>
 
-		<script src="script.js"></script>
-	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script src="script.js"></script>
+</body>
+
 </html>
