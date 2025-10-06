@@ -75,7 +75,11 @@ const nativeShareBtn = document.getElementById('nativeShareBtn')
 
 const feedbackBtn = document.getElementById('feedbackBtn')
 const feedbackPopupOverlay = document.getElementById('feedbackPopupOverlay')
+const shareLinkPopupOverlay = document.getElementById('shareLinkPopupOverlay')
 const closeFeedbackPopup = document.getElementById('closeFeedbackPopup')
+const closeShareLinkPopup = document.getElementById('closeShareLinkPopup')
+const closeShareLinkBtn = document.getElementById('closeShareLinkBtn')
+const copyShareLink = document.getElementById('copyShareLink')
 const feedbackForm = document.getElementById('feedbackForm')
 const cancelFeedback = document.getElementById('cancelFeedback')
 const feedbackSuccess = document.getElementById('feedbackSuccess')
@@ -1205,7 +1209,20 @@ shareInstagram.addEventListener('click', () => {
 copyLinkBtn.addEventListener('click', () => {
 	navigator.clipboard
 		.writeText(window.location.href)
-		.then(() => alert('Link copied to clipboard!'))
+		.then(() => {
+			document.getElementById('shareLinkInput').value = window.location.href
+			shareLinkPopupOverlay.classList.remove('hidden')
+		})
+		.catch(() => alert('Failed to copy link'))
+})
+
+copyShareLink.addEventListener('click', () => {
+	navigator.clipboard
+		.writeText(window.location.href)
+		.then(() => {
+			document.getElementById('shareLinkInput').value = window.location.href
+			shareLinkPopupOverlay.classList.remove('hidden')
+		})
 		.catch(() => alert('Failed to copy link'))
 })
 
@@ -1337,6 +1354,16 @@ feedbackBtn.addEventListener('click', () => {
 closeFeedbackPopup.addEventListener('click', () => {
 	feedbackPopupOverlay.classList.add('hidden')
 	resetFeedbackForm()
+})
+
+// Close share link popup
+closeShareLinkPopup.addEventListener('click', () => {
+	shareLinkPopupOverlay.classList.add('hidden')
+})
+
+// Cancel shareLink popup
+closeShareLink.addEventListener('click', () => {
+	shareLinkPopupOverlay.classList.add('hidden')
 })
 
 cancelFeedback.addEventListener('click', () => {
