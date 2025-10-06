@@ -51,17 +51,14 @@ Logic can be easily customized by contributors!
 
 ## 🔮 Future Enhancements
 
-🎭 Add animations & emojis 🎉
+📲 PWA (Progressive Web App) 
+ 
+🎨 Custom Theme Picker 
 
-🧠 Better scoring algorithm (numerology-based)
+💬 Chatbot / Love Guru Mode
 
-🌙 Dark/Light mode toggle
+🎙️ Voice Input / Output 
 
-💬 Dynamic messages for different score ranges
-
-📤 Share results feature
-
-🌈 Color themes customization
 
 ## 🤝 Contributing
 
