@@ -1675,12 +1675,86 @@ async function loadHtml2Canvas() {
       existing.addEventListener('error', reject);
       return;
     }
+});
 
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-    script.dataset.html2canvas = 'true';
-    script.onload = resolve;
-    script.onerror = () => reject(new Error('Failed to load html2canvas library.'));
-    document.body.appendChild(script);
-  });
-}
+/* ============================
+        Daily Love Quotes 
+============================ */
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+	try{
+		//first fetch our json file
+		const response =await fetch("love-quotes.json");
+		//check if connection is established
+		if (!response.ok){
+			throw new Error ("Network Response not OK");
+		}
+		const data = await response.json();
+		// make today date a string like Mon Oct 06 2025
+		const today = new Date().toDateString();
+
+		const stored = JSON.parse(localStorage.getItem("quoteOfTheDay"));
+
+		
+
+		let quoteObj;
+		if ((stored) && stored.date === today){
+			quoteObj = stored.quoteObj;
+		}else{
+			const randomIndex = Math.floor(Math.random() * data.loveQuote.length);
+			quoteObj = data.loveQuote[randomIndex];
+			localStorage.setItem("quoteOfTheDay",JSON.stringify({
+				date:today,
+				quoteObj: quoteObj
+			}));
+
+		}
+		
+		const loveQuote = document.querySelector(".love-quote");
+
+		const quoteParagraph = document.createElement("p");
+		quoteParagraph.classList.add("quote-text");
+		quoteParagraph.textContent =`💕 ${quoteObj.quote} 💘`;
+
+		loveQuote.appendChild(quoteParagraph);
+
+
+		const loveQuoteContainer = document.querySelector(".love-quote-container");
+		const author = document.createElement("p");
+		const authorLink = document.createElement("a");
+		authorLink.textContent = quoteObj.author;
+		authorLink.href = quoteObj.gitId;
+		// make it open in new tab
+		authorLink.target="_blank"
+
+		author.classList.add("author");
+		authorLink.classList.add("authorLink");
+
+		// authorParagraph.classList.add("quote-author");
+		
+		loveQuoteContainer.appendChild(author);
+		author.appendChild(authorLink);
+
+		
+
+		
+
+	}catch(e){
+		console.error(e)
+		// fallback if there is any error
+		const fallbackQuote = "What is love? Baby dont hurt me.";
+		const loveQuoteContainer = document.querySelector(".love-quote");
+
+		const quoteParagraph = document.createElement("p");
+		quoteParagraph.classList.add("quote-text");
+		quoteParagraph.textContent = fallbackQuote;
+		
+
+		loveQuoteContainer.appendChild(quoteParagraph);
+
+	}
+
+})
+
+
