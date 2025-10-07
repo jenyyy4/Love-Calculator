@@ -92,6 +92,16 @@ git push origin amazing-feature
 🔔 Open a Pull Request
 
 
+## 📜 Code of Conduct
+
+This project follows a Code of Conduct to keep the community welcoming and respectful. By participating you agree to abide by it. 
+
+📖 Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before contributing.
+
+To report unacceptable behavior, contact the maintainers via [@Deepak-Kambala](https://github.com/Deepak-Kambala) or open a private issue.
+
+---
+
 
 ## 📄 License
 This project is licensed under the MIT License — see the LICENSE file for details.
