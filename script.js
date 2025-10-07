@@ -1684,3 +1684,22 @@ async function loadHtml2Canvas() {
     document.body.appendChild(script);
   });
 }
+//Navbar toggle
+
+ document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navControls = document.getElementById('nav-controls');
+
+            if (menuToggle && navControls) {
+                menuToggle.addEventListener('click', () => {
+                    navControls.classList.toggle('active');
+                });
+            }
+        });
+
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({
+			pageLanguage: 'en',
+			layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+		}, 'google_translate_element');
+	}
