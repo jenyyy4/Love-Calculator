@@ -2380,3 +2380,62 @@ body.dark-mode .feedback-list-section {
 	color: #991b1b;
 
 }
+/* styles added by dodithakur for social media buttons hover */
+#calcBtn{
+	transform: translateY(0);           
+    transition: transform 0.3s ease;
+}
+.primary.NG{
+	transform: translateY(0);           
+    transition: transform 0.3s ease;
+}
+#shareWhatsapp{
+	transform: translateY(0);
+	transition:transform  0.3s ease ;
+}
+#shareTwitter{
+	  transform: translateY(0);
+	transition:transform 0.3s  ease ;
+}
+#shareFacebook{
+	 transform: translateY(0);
+	transition:transform  0.3s ease ;
+}
+#shareInstagram{
+	 transform: translateY(0);
+	transition:transform  0.3s ease ;
+}
+#generateLoveCard{
+	transform: translateY(0);           
+    transition: transform 0.3s ease;
+}
+#copyLinkBtn{
+	transform: translateY(0);          
+    transition: transform 0.3s ease;
+}
+
+
+#calcBtn:hover{
+	transform:translateY(-6px);
+}
+.primary.NG:hover{
+	transform:translateY(-6px);
+}
+#shareWhatsapp:hover{
+	transform: translateY(-6px);
+}
+#shareTwitter:hover{
+	transform: translateY(-6px);
+}
+#shareFacebook:hover{
+	transform: translateY(-6px);
+}
+#shareInstagram:hover{
+	transform: translateY(-6px);
+}
+#copyLinkBtn:hover{
+	transform:translateY(-6px);
+}
+#generateLoveCard:hover{
+	transform:translateY(-6px);
+}
