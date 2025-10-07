@@ -608,6 +608,23 @@ function alertDialog(message, title = 'Warning') {
 	}
 }
 
+// Lightweight toast notification
+function showToast(message) {
+    try {
+        const existing = document.querySelector('.lc-toast')
+        if (existing) existing.remove()
+        const toast = document.createElement('div')
+        toast.className = 'lc-toast'
+        toast.textContent = message
+        document.body.appendChild(toast)
+        // auto remove after animation
+        setTimeout(() => {
+            toast.classList.add('hide')
+            setTimeout(() => toast.remove(), 300)
+        }, 1800)
+    } catch (_) {}
+}
+
 /* ============================
    Main calculate function
    ============================ */
@@ -765,6 +782,18 @@ shareBtn.addEventListener('click', (ev) => {
 		?.writeText(url)
 		.then(() => {
 			// copied — proceed to image generation
+			const original = copyLinkBtn?.textContent
+			if (copyLinkBtn) {
+				copyLinkBtn.textContent = 'Copied!'
+				copyLinkBtn.disabled = true
+			}
+			showToast('Link copied to clipboard!')
+			setTimeout(() => {
+				if (copyLinkBtn) {
+					copyLinkBtn.textContent = original
+					copyLinkBtn.disabled = false
+				}
+			}, 1600)
 		})
 		.catch(() => {
 			// ignore copy errors; still proceed to image generation
@@ -1207,23 +1236,30 @@ shareInstagram.addEventListener('click', () => {
 
 // Copy Link
 copyLinkBtn.addEventListener('click', () => {
-	navigator.clipboard
-		.writeText(window.location.href)
-		.then(() => {
-			document.getElementById('shareLinkInput').value = window.location.href
-			shareLinkPopupOverlay.classList.remove('hidden')
-		})
-		.catch(() => alert('Failed to copy link'))
+    // Do NOT copy here. Only open the popup and prefill the link.
+    try {
+        document.getElementById('shareLinkInput').value = window.location.href
+        shareLinkPopupOverlay.classList.remove('hidden')
+    } catch (_) {}
 })
 
 copyShareLink.addEventListener('click', () => {
-	navigator.clipboard
-		.writeText(window.location.href)
-		.then(() => {
-			document.getElementById('shareLinkInput').value = window.location.href
-			shareLinkPopupOverlay.classList.remove('hidden')
-		})
-		.catch(() => alert('Failed to copy link'))
+    const original = copyShareLink.textContent
+    copyShareLink.disabled = true
+    navigator.clipboard
+        .writeText(window.location.href)
+        .then(() => {
+            copyShareLink.textContent = 'Copied!'
+            showToast('Link copied to clipboard!')
+            setTimeout(() => {
+                copyShareLink.textContent = original
+                copyShareLink.disabled = false
+            }, 1600)
+        })
+        .catch(() => {
+            alert('Failed to copy link')
+            copyShareLink.disabled = false
+        })
 })
 
 historyBtn.addEventListener('click', () => {
