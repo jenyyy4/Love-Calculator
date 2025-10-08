@@ -1128,7 +1128,8 @@ body {
 .ghost-btn:hover {
 	background: rgba(255, 255, 255, 0.02);
 	border-color: rgba(255, 255, 255, 0.08);
-	transform: translateY(-1px);
+	/* transform: translateY(-1px); */
+	transform: scale(1.05);
 }
 
 /* Google Translate Widget Styling */
@@ -2388,28 +2389,28 @@ body.dark-mode .feedback-list-section {
 
 
 #calcBtn:hover{
-	transform:translateY(-6px);
+	transform: scale(1.05);
 }
 .primary.NG:hover{
-	transform:translateY(-6px);
+	transform: scale(1.05);
 }
 #shareWhatsapp:hover{
-	transform: translateY(-6px);
+	transform: scale(1.05);
 }
 #shareTwitter:hover{
-	transform: translateY(-6px);
+	transform: scale(1.05);
 }
 #shareFacebook:hover{
-	transform: translateY(-6px);
+	transform: scale(1.05);
 }
 #shareInstagram:hover{
-	transform: translateY(-6px);
+	transform: scale(1.05);
 }
 #copyLinkBtn:hover{
-	transform:translateY(-6px);
+	transform: scale(1.05);
 }
 #generateLoveCard:hover{
-	transform:translateY(-6px);
+	transform: scale(1.05);
 }
 /*Toggle navbar*/
  :root {
