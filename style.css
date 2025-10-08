@@ -2307,6 +2307,10 @@ body.dark-mode .feedback-list-section {
 	opacity: 1;
 }
 
+.custom-alert-box h2 {
+    color: black;
+}
+
 .custom-alert-box p {
 	color: #333;
 	font-size: 1em;
