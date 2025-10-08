@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/hearts.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../hearts.png" type="image/x-icon">
     <title>Spin the Wheel of Love 💖</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +41,15 @@
         <div class="love-calculator-input">
             <input type="number" id="lovePercentage" placeholder="Enter Love %" min="0" max="100" step="1">
             <button id="setLoveBtn" class="set-love-btn">Set Love %</button>
+        </div>
+
+        <!-- Custom Alert -->
+        <div id="alertOverlay" class="custom-alert-overlay">
+          <div class="custom-alert-box">
+            <h3 id="alertTitle">Alert</h3>
+            <p id="alertMessage">Message</p>
+            <button class="alert-btn" onclick="closeAlert()">OK</button>
+          </div>
         </div>
 
         <div class="wheel-container">
